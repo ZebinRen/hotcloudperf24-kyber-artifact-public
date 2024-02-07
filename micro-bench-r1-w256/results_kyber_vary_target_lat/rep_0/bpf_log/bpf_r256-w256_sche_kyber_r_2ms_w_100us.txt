@@ -1,0 +1,25 @@
+Attaching 2 probes...
+start: 446934801874498
+domain: READ, depth: 192, timestamp: 446960132042781
+domain: READ, depth: 256, timestamp: 446960560012034
+domain: READ, depth: 192, timestamp: 447059888014940
+domain: READ, depth: 256, timestamp: 447060200011037
+domain: WRITE, depth: 32, timestamp: 447211832012841
+domain: WRITE, depth: 40, timestamp: 447211936012097
+domain: WRITE, depth: 60, timestamp: 447212040012434
+domain: WRITE, depth: 120, timestamp: 447212144012257
+domain: WRITE, depth: 128, timestamp: 447212248011491
+domain: WRITE, depth: 32, timestamp: 447212352012451
+domain: WRITE, depth: 64, timestamp: 447212560011740
+domain: WRITE, depth: 128, timestamp: 447212664067862
+domain: WRITE, depth: 96, timestamp: 447225936012768
+domain: WRITE, depth: 128, timestamp: 447226460012558
+domain: READ, depth: 192, timestamp: 447388396013624
+domain: READ, depth: 256, timestamp: 447388604022732
+domain: READ, depth: 192, timestamp: 447500612072200
+domain: READ, depth: 240, timestamp: 447500824012617
+domain: READ, depth: 256, timestamp: 447501344011070
+domain: READ, depth: 192, timestamp: 447625556072089
+domain: READ, depth: 256, timestamp: 447625764009903
+domain: WRITE, depth: 96, timestamp: 447648168012128
+domain: WRITE, depth: 128, timestamp: 447648272010930

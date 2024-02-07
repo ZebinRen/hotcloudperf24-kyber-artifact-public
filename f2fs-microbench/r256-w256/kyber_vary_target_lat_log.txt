@@ -1,0 +1,763 @@
+{'run': True, 'print_only': False}
+umount /dev/nvme5n1
+b''
+b''
+nvme format -s 1 /dev/nvme5n1
+b'Success formatting namespace:1\n'
+b''
+mkfs.f2fs /dev/nvme5n1
+b'\n\tF2FS-tools: mkfs.f2fs Ver: 1.11.0 (2018-07-10)\n\nInfo: Disable heap-based policy\nInfo: Debug level = 0\nInfo: Label = \nInfo: Trim is enabled\nInfo: Segments per section = 1\nInfo: Sections per zone = 1\nInfo: sector size = 512\nInfo: total sectors = 1953525168 (953869 MB)\nInfo: zone aligned segment0 blkaddr: 512\nInfo: format version with\n  "Linux version 6.3.8-sched-expr (zebin@node5) (gcc (Ubuntu 10.5.0-1ubuntu1~20.04) 10.5.0, GNU ld (GNU Binutils for Ubuntu) 2.34) #2 SMP PREEMPT_DYNAMIC Wed Sep  6 14:33:29 CEST 2023"\nInfo: [/dev/nvme5n1] Discarding device\nInfo: This device doesn\'t support BLKSECDISCARD\nInfo: Discarded 953869 MB\nInfo: Overprovision ratio = 0.210%\nInfo: Overprovision segments = 1957 (GC reserved = 960)\nInfo: format successful\n'
+b''
+mount /dev/nvme5n1 /mnt/nvme_test/
+b''
+b''
+head -c 50G </dev/urandom >/mnt/nvme_test/fio_file
+b''
+b''
+sleep 10s
+b''
+b''
+modprobe -r kyber_iosched
+b''
+b''
+modprobe kyber_iosched
+b''
+b''
+Set parameter read_lat_nsec to 50000
+Set parameter write_lat_nsec to 20000
+exec bpftrace -e 'BEGIN {printf("start: %llu\n", nsecs)} tracepoint:kyber:kyber_adjust {printf("domain: %s, depth: %d, timestamp: %llu\n", args->domain, args->depth, nsecs)}' > results_kyber_vary_target_lat/rep_0/bpf_log/bpf_r256-w256_sche_kyber_r_50us_w_20us.txt
+sleep 10s
+b''
+b''
+/mnt/sdc/zebin/local/fio-3.35/fio --time_based=1 --ramp_time=360s --runtime=360s --ioengine=io_uring --registerfiles=1 --fixedbufs=1 --size=100% --norandommap=1 --group_reporting=1 --direct=1 --output-format=json --bs=4k --filename=/mnt/nvme_test/fio_file --write_iops_log=results_kyber_vary_target_lat/rep_0/iops_log/r256-w256_sche_kyber_r_50us_w_20us_iops --write_lat_log=results_kyber_vary_target_lat/rep_0/lat_log/r256-w256_sche_kyber_r_50us_w_20us_lat --log_avg_msec=1000 --name=1 --rw=randread --cpus_allowed=1 --iodepth=256 --name=2 --rw=randwrite --cpus_allowed=2 --iodepth=256 -o results_kyber_vary_target_lat/rep_0/fio_output/r256-w256_sche_kyber_r_50us_w_20us.txt
+b''
+b''
+sleep 5s
+b''
+b''
+umount /dev/nvme5n1
+b''
+b''
+nvme format -s 1 /dev/nvme5n1
+b'Success formatting namespace:1\n'
+b''
+mkfs.f2fs /dev/nvme5n1
+b'\n\tF2FS-tools: mkfs.f2fs Ver: 1.11.0 (2018-07-10)\n\nInfo: Disable heap-based policy\nInfo: Debug level = 0\nInfo: Label = \nInfo: Trim is enabled\nInfo: Segments per section = 1\nInfo: Sections per zone = 1\nInfo: sector size = 512\nInfo: total sectors = 1953525168 (953869 MB)\nInfo: zone aligned segment0 blkaddr: 512\nInfo: format version with\n  "Linux version 6.3.8-sched-expr (zebin@node5) (gcc (Ubuntu 10.5.0-1ubuntu1~20.04) 10.5.0, GNU ld (GNU Binutils for Ubuntu) 2.34) #2 SMP PREEMPT_DYNAMIC Wed Sep  6 14:33:29 CEST 2023"\nInfo: [/dev/nvme5n1] Discarding device\nInfo: This device doesn\'t support BLKSECDISCARD\nInfo: Discarded 953869 MB\nInfo: Overprovision ratio = 0.210%\nInfo: Overprovision segments = 1957 (GC reserved = 960)\nInfo: format successful\n'
+b''
+mount /dev/nvme5n1 /mnt/nvme_test/
+b''
+b''
+head -c 50G </dev/urandom >/mnt/nvme_test/fio_file
+b''
+b''
+sleep 10s
+b''
+b''
+modprobe -r kyber_iosched
+b''
+b''
+modprobe kyber_iosched
+b''
+b''
+Set parameter read_lat_nsec to 100000000
+Set parameter write_lat_nsec to 100000000
+exec bpftrace -e 'BEGIN {printf("start: %llu\n", nsecs)} tracepoint:kyber:kyber_adjust {printf("domain: %s, depth: %d, timestamp: %llu\n", args->domain, args->depth, nsecs)}' > results_kyber_vary_target_lat/rep_0/bpf_log/bpf_r256-w256_sche_kyber_r_100ms_w_100ms.txt
+sleep 10s
+b''
+b''
+/mnt/sdc/zebin/local/fio-3.35/fio --time_based=1 --ramp_time=360s --runtime=360s --ioengine=io_uring --registerfiles=1 --fixedbufs=1 --size=100% --norandommap=1 --group_reporting=1 --direct=1 --output-format=json --bs=4k --filename=/mnt/nvme_test/fio_file --write_iops_log=results_kyber_vary_target_lat/rep_0/iops_log/r256-w256_sche_kyber_r_100ms_w_100ms_iops --write_lat_log=results_kyber_vary_target_lat/rep_0/lat_log/r256-w256_sche_kyber_r_100ms_w_100ms_lat --log_avg_msec=1000 --name=1 --rw=randread --cpus_allowed=1 --iodepth=256 --name=2 --rw=randwrite --cpus_allowed=2 --iodepth=256 -o results_kyber_vary_target_lat/rep_0/fio_output/r256-w256_sche_kyber_r_100ms_w_100ms.txt
+b''
+b''
+sleep 5s
+b''
+b''
+umount /dev/nvme5n1
+b''
+b''
+nvme format -s 1 /dev/nvme5n1
+b'Success formatting namespace:1\n'
+b''
+mkfs.f2fs /dev/nvme5n1
+b'\n\tF2FS-tools: mkfs.f2fs Ver: 1.11.0 (2018-07-10)\n\nInfo: Disable heap-based policy\nInfo: Debug level = 0\nInfo: Label = \nInfo: Trim is enabled\nInfo: Segments per section = 1\nInfo: Sections per zone = 1\nInfo: sector size = 512\nInfo: total sectors = 1953525168 (953869 MB)\nInfo: zone aligned segment0 blkaddr: 512\nInfo: format version with\n  "Linux version 6.3.8-sched-expr (zebin@node5) (gcc (Ubuntu 10.5.0-1ubuntu1~20.04) 10.5.0, GNU ld (GNU Binutils for Ubuntu) 2.34) #2 SMP PREEMPT_DYNAMIC Wed Sep  6 14:33:29 CEST 2023"\nInfo: [/dev/nvme5n1] Discarding device\nInfo: This device doesn\'t support BLKSECDISCARD\nInfo: Discarded 953869 MB\nInfo: Overprovision ratio = 0.210%\nInfo: Overprovision segments = 1957 (GC reserved = 960)\nInfo: format successful\n'
+b''
+mount /dev/nvme5n1 /mnt/nvme_test/
+b''
+b''
+head -c 50G </dev/urandom >/mnt/nvme_test/fio_file
+b''
+b''
+sleep 10s
+b''
+b''
+modprobe -r kyber_iosched
+b''
+b''
+modprobe kyber_iosched
+b''
+b''
+Set parameter read_lat_nsec to 100000000
+Set parameter write_lat_nsec to 20000
+exec bpftrace -e 'BEGIN {printf("start: %llu\n", nsecs)} tracepoint:kyber:kyber_adjust {printf("domain: %s, depth: %d, timestamp: %llu\n", args->domain, args->depth, nsecs)}' > results_kyber_vary_target_lat/rep_0/bpf_log/bpf_r256-w256_sche_kyber_r_100ms_w_20us.txt
+sleep 10s
+b''
+b''
+/mnt/sdc/zebin/local/fio-3.35/fio --time_based=1 --ramp_time=360s --runtime=360s --ioengine=io_uring --registerfiles=1 --fixedbufs=1 --size=100% --norandommap=1 --group_reporting=1 --direct=1 --output-format=json --bs=4k --filename=/mnt/nvme_test/fio_file --write_iops_log=results_kyber_vary_target_lat/rep_0/iops_log/r256-w256_sche_kyber_r_100ms_w_20us_iops --write_lat_log=results_kyber_vary_target_lat/rep_0/lat_log/r256-w256_sche_kyber_r_100ms_w_20us_lat --log_avg_msec=1000 --name=1 --rw=randread --cpus_allowed=1 --iodepth=256 --name=2 --rw=randwrite --cpus_allowed=2 --iodepth=256 -o results_kyber_vary_target_lat/rep_0/fio_output/r256-w256_sche_kyber_r_100ms_w_20us.txt
+b''
+b''
+sleep 5s
+b''
+b''
+umount /dev/nvme5n1
+b''
+b''
+nvme format -s 1 /dev/nvme5n1
+b'Success formatting namespace:1\n'
+b''
+mkfs.f2fs /dev/nvme5n1
+b'\n\tF2FS-tools: mkfs.f2fs Ver: 1.11.0 (2018-07-10)\n\nInfo: Disable heap-based policy\nInfo: Debug level = 0\nInfo: Label = \nInfo: Trim is enabled\nInfo: Segments per section = 1\nInfo: Sections per zone = 1\nInfo: sector size = 512\nInfo: total sectors = 1953525168 (953869 MB)\nInfo: zone aligned segment0 blkaddr: 512\nInfo: format version with\n  "Linux version 6.3.8-sched-expr (zebin@node5) (gcc (Ubuntu 10.5.0-1ubuntu1~20.04) 10.5.0, GNU ld (GNU Binutils for Ubuntu) 2.34) #2 SMP PREEMPT_DYNAMIC Wed Sep  6 14:33:29 CEST 2023"\nInfo: [/dev/nvme5n1] Discarding device\nInfo: This device doesn\'t support BLKSECDISCARD\nInfo: Discarded 953869 MB\nInfo: Overprovision ratio = 0.210%\nInfo: Overprovision segments = 1957 (GC reserved = 960)\nInfo: format successful\n'
+b''
+mount /dev/nvme5n1 /mnt/nvme_test/
+b''
+b''
+head -c 50G </dev/urandom >/mnt/nvme_test/fio_file
+b''
+b''
+sleep 10s
+b''
+b''
+modprobe -r kyber_iosched
+b''
+b''
+modprobe kyber_iosched
+b''
+b''
+Set parameter read_lat_nsec to 50000
+Set parameter write_lat_nsec to 100000000
+exec bpftrace -e 'BEGIN {printf("start: %llu\n", nsecs)} tracepoint:kyber:kyber_adjust {printf("domain: %s, depth: %d, timestamp: %llu\n", args->domain, args->depth, nsecs)}' > results_kyber_vary_target_lat/rep_0/bpf_log/bpf_r256-w256_sche_kyber_r_50us_w_100ms.txt
+sleep 10s
+b''
+b''
+/mnt/sdc/zebin/local/fio-3.35/fio --time_based=1 --ramp_time=360s --runtime=360s --ioengine=io_uring --registerfiles=1 --fixedbufs=1 --size=100% --norandommap=1 --group_reporting=1 --direct=1 --output-format=json --bs=4k --filename=/mnt/nvme_test/fio_file --write_iops_log=results_kyber_vary_target_lat/rep_0/iops_log/r256-w256_sche_kyber_r_50us_w_100ms_iops --write_lat_log=results_kyber_vary_target_lat/rep_0/lat_log/r256-w256_sche_kyber_r_50us_w_100ms_lat --log_avg_msec=1000 --name=1 --rw=randread --cpus_allowed=1 --iodepth=256 --name=2 --rw=randwrite --cpus_allowed=2 --iodepth=256 -o results_kyber_vary_target_lat/rep_0/fio_output/r256-w256_sche_kyber_r_50us_w_100ms.txt
+b''
+b''
+sleep 5s
+b''
+b''
+umount /dev/nvme5n1
+b''
+b''
+nvme format -s 1 /dev/nvme5n1
+b'Success formatting namespace:1\n'
+b''
+mkfs.f2fs /dev/nvme5n1
+b'\n\tF2FS-tools: mkfs.f2fs Ver: 1.11.0 (2018-07-10)\n\nInfo: Disable heap-based policy\nInfo: Debug level = 0\nInfo: Label = \nInfo: Trim is enabled\nInfo: Segments per section = 1\nInfo: Sections per zone = 1\nInfo: sector size = 512\nInfo: total sectors = 1953525168 (953869 MB)\nInfo: zone aligned segment0 blkaddr: 512\nInfo: format version with\n  "Linux version 6.3.8-sched-expr (zebin@node5) (gcc (Ubuntu 10.5.0-1ubuntu1~20.04) 10.5.0, GNU ld (GNU Binutils for Ubuntu) 2.34) #2 SMP PREEMPT_DYNAMIC Wed Sep  6 14:33:29 CEST 2023"\nInfo: [/dev/nvme5n1] Discarding device\nInfo: This device doesn\'t support BLKSECDISCARD\nInfo: Discarded 953869 MB\nInfo: Overprovision ratio = 0.210%\nInfo: Overprovision segments = 1957 (GC reserved = 960)\nInfo: format successful\n'
+b''
+mount /dev/nvme5n1 /mnt/nvme_test/
+b''
+b''
+head -c 50G </dev/urandom >/mnt/nvme_test/fio_file
+b''
+b''
+sleep 10s
+b''
+b''
+modprobe -r kyber_iosched
+b''
+b''
+modprobe kyber_iosched
+b''
+b''
+Set parameter read_lat_nsec to 50000
+Set parameter write_lat_nsec to 20000
+exec bpftrace -e 'BEGIN {printf("start: %llu\n", nsecs)} tracepoint:kyber:kyber_adjust {printf("domain: %s, depth: %d, timestamp: %llu\n", args->domain, args->depth, nsecs)}' > results_kyber_vary_target_lat/rep_1/bpf_log/bpf_r256-w256_sche_kyber_r_50us_w_20us.txt
+sleep 10s
+b''
+b''
+/mnt/sdc/zebin/local/fio-3.35/fio --time_based=1 --ramp_time=360s --runtime=360s --ioengine=io_uring --registerfiles=1 --fixedbufs=1 --size=100% --norandommap=1 --group_reporting=1 --direct=1 --output-format=json --bs=4k --filename=/mnt/nvme_test/fio_file --write_iops_log=results_kyber_vary_target_lat/rep_1/iops_log/r256-w256_sche_kyber_r_50us_w_20us_iops --write_lat_log=results_kyber_vary_target_lat/rep_1/lat_log/r256-w256_sche_kyber_r_50us_w_20us_lat --log_avg_msec=1000 --name=1 --rw=randread --cpus_allowed=1 --iodepth=256 --name=2 --rw=randwrite --cpus_allowed=2 --iodepth=256 -o results_kyber_vary_target_lat/rep_1/fio_output/r256-w256_sche_kyber_r_50us_w_20us.txt
+b''
+b''
+sleep 5s
+b''
+b''
+umount /dev/nvme5n1
+b''
+b''
+nvme format -s 1 /dev/nvme5n1
+b'Success formatting namespace:1\n'
+b''
+mkfs.f2fs /dev/nvme5n1
+b'\n\tF2FS-tools: mkfs.f2fs Ver: 1.11.0 (2018-07-10)\n\nInfo: Disable heap-based policy\nInfo: Debug level = 0\nInfo: Label = \nInfo: Trim is enabled\nInfo: Segments per section = 1\nInfo: Sections per zone = 1\nInfo: sector size = 512\nInfo: total sectors = 1953525168 (953869 MB)\nInfo: zone aligned segment0 blkaddr: 512\nInfo: format version with\n  "Linux version 6.3.8-sched-expr (zebin@node5) (gcc (Ubuntu 10.5.0-1ubuntu1~20.04) 10.5.0, GNU ld (GNU Binutils for Ubuntu) 2.34) #2 SMP PREEMPT_DYNAMIC Wed Sep  6 14:33:29 CEST 2023"\nInfo: [/dev/nvme5n1] Discarding device\nInfo: This device doesn\'t support BLKSECDISCARD\nInfo: Discarded 953869 MB\nInfo: Overprovision ratio = 0.210%\nInfo: Overprovision segments = 1957 (GC reserved = 960)\nInfo: format successful\n'
+b''
+mount /dev/nvme5n1 /mnt/nvme_test/
+b''
+b''
+head -c 50G </dev/urandom >/mnt/nvme_test/fio_file
+b''
+b''
+sleep 10s
+b''
+b''
+modprobe -r kyber_iosched
+b''
+b''
+modprobe kyber_iosched
+b''
+b''
+Set parameter read_lat_nsec to 100000000
+Set parameter write_lat_nsec to 20000
+exec bpftrace -e 'BEGIN {printf("start: %llu\n", nsecs)} tracepoint:kyber:kyber_adjust {printf("domain: %s, depth: %d, timestamp: %llu\n", args->domain, args->depth, nsecs)}' > results_kyber_vary_target_lat/rep_1/bpf_log/bpf_r256-w256_sche_kyber_r_100ms_w_20us.txt
+sleep 10s
+b''
+b''
+/mnt/sdc/zebin/local/fio-3.35/fio --time_based=1 --ramp_time=360s --runtime=360s --ioengine=io_uring --registerfiles=1 --fixedbufs=1 --size=100% --norandommap=1 --group_reporting=1 --direct=1 --output-format=json --bs=4k --filename=/mnt/nvme_test/fio_file --write_iops_log=results_kyber_vary_target_lat/rep_1/iops_log/r256-w256_sche_kyber_r_100ms_w_20us_iops --write_lat_log=results_kyber_vary_target_lat/rep_1/lat_log/r256-w256_sche_kyber_r_100ms_w_20us_lat --log_avg_msec=1000 --name=1 --rw=randread --cpus_allowed=1 --iodepth=256 --name=2 --rw=randwrite --cpus_allowed=2 --iodepth=256 -o results_kyber_vary_target_lat/rep_1/fio_output/r256-w256_sche_kyber_r_100ms_w_20us.txt
+b''
+b''
+sleep 5s
+b''
+b''
+umount /dev/nvme5n1
+b''
+b''
+nvme format -s 1 /dev/nvme5n1
+b'Success formatting namespace:1\n'
+b''
+mkfs.f2fs /dev/nvme5n1
+b'\n\tF2FS-tools: mkfs.f2fs Ver: 1.11.0 (2018-07-10)\n\nInfo: Disable heap-based policy\nInfo: Debug level = 0\nInfo: Label = \nInfo: Trim is enabled\nInfo: Segments per section = 1\nInfo: Sections per zone = 1\nInfo: sector size = 512\nInfo: total sectors = 1953525168 (953869 MB)\nInfo: zone aligned segment0 blkaddr: 512\nInfo: format version with\n  "Linux version 6.3.8-sched-expr (zebin@node5) (gcc (Ubuntu 10.5.0-1ubuntu1~20.04) 10.5.0, GNU ld (GNU Binutils for Ubuntu) 2.34) #2 SMP PREEMPT_DYNAMIC Wed Sep  6 14:33:29 CEST 2023"\nInfo: [/dev/nvme5n1] Discarding device\nInfo: This device doesn\'t support BLKSECDISCARD\nInfo: Discarded 953869 MB\nInfo: Overprovision ratio = 0.210%\nInfo: Overprovision segments = 1957 (GC reserved = 960)\nInfo: format successful\n'
+b''
+mount /dev/nvme5n1 /mnt/nvme_test/
+b''
+b''
+head -c 50G </dev/urandom >/mnt/nvme_test/fio_file
+b''
+b''
+sleep 10s
+b''
+b''
+modprobe -r kyber_iosched
+b''
+b''
+modprobe kyber_iosched
+b''
+b''
+Set parameter read_lat_nsec to 50000
+Set parameter write_lat_nsec to 100000000
+exec bpftrace -e 'BEGIN {printf("start: %llu\n", nsecs)} tracepoint:kyber:kyber_adjust {printf("domain: %s, depth: %d, timestamp: %llu\n", args->domain, args->depth, nsecs)}' > results_kyber_vary_target_lat/rep_1/bpf_log/bpf_r256-w256_sche_kyber_r_50us_w_100ms.txt
+sleep 10s
+b''
+b''
+/mnt/sdc/zebin/local/fio-3.35/fio --time_based=1 --ramp_time=360s --runtime=360s --ioengine=io_uring --registerfiles=1 --fixedbufs=1 --size=100% --norandommap=1 --group_reporting=1 --direct=1 --output-format=json --bs=4k --filename=/mnt/nvme_test/fio_file --write_iops_log=results_kyber_vary_target_lat/rep_1/iops_log/r256-w256_sche_kyber_r_50us_w_100ms_iops --write_lat_log=results_kyber_vary_target_lat/rep_1/lat_log/r256-w256_sche_kyber_r_50us_w_100ms_lat --log_avg_msec=1000 --name=1 --rw=randread --cpus_allowed=1 --iodepth=256 --name=2 --rw=randwrite --cpus_allowed=2 --iodepth=256 -o results_kyber_vary_target_lat/rep_1/fio_output/r256-w256_sche_kyber_r_50us_w_100ms.txt
+b''
+b''
+sleep 5s
+b''
+b''
+umount /dev/nvme5n1
+b''
+b''
+nvme format -s 1 /dev/nvme5n1
+b'Success formatting namespace:1\n'
+b''
+mkfs.f2fs /dev/nvme5n1
+b'\n\tF2FS-tools: mkfs.f2fs Ver: 1.11.0 (2018-07-10)\n\nInfo: Disable heap-based policy\nInfo: Debug level = 0\nInfo: Label = \nInfo: Trim is enabled\nInfo: Segments per section = 1\nInfo: Sections per zone = 1\nInfo: sector size = 512\nInfo: total sectors = 1953525168 (953869 MB)\nInfo: zone aligned segment0 blkaddr: 512\nInfo: format version with\n  "Linux version 6.3.8-sched-expr (zebin@node5) (gcc (Ubuntu 10.5.0-1ubuntu1~20.04) 10.5.0, GNU ld (GNU Binutils for Ubuntu) 2.34) #2 SMP PREEMPT_DYNAMIC Wed Sep  6 14:33:29 CEST 2023"\nInfo: [/dev/nvme5n1] Discarding device\nInfo: This device doesn\'t support BLKSECDISCARD\nInfo: Discarded 953869 MB\nInfo: Overprovision ratio = 0.210%\nInfo: Overprovision segments = 1957 (GC reserved = 960)\nInfo: format successful\n'
+b''
+mount /dev/nvme5n1 /mnt/nvme_test/
+b''
+b''
+head -c 50G </dev/urandom >/mnt/nvme_test/fio_file
+b''
+b''
+sleep 10s
+b''
+b''
+modprobe -r kyber_iosched
+b''
+b''
+modprobe kyber_iosched
+b''
+b''
+Set parameter read_lat_nsec to 100000000
+Set parameter write_lat_nsec to 100000000
+exec bpftrace -e 'BEGIN {printf("start: %llu\n", nsecs)} tracepoint:kyber:kyber_adjust {printf("domain: %s, depth: %d, timestamp: %llu\n", args->domain, args->depth, nsecs)}' > results_kyber_vary_target_lat/rep_1/bpf_log/bpf_r256-w256_sche_kyber_r_100ms_w_100ms.txt
+sleep 10s
+b''
+b''
+/mnt/sdc/zebin/local/fio-3.35/fio --time_based=1 --ramp_time=360s --runtime=360s --ioengine=io_uring --registerfiles=1 --fixedbufs=1 --size=100% --norandommap=1 --group_reporting=1 --direct=1 --output-format=json --bs=4k --filename=/mnt/nvme_test/fio_file --write_iops_log=results_kyber_vary_target_lat/rep_1/iops_log/r256-w256_sche_kyber_r_100ms_w_100ms_iops --write_lat_log=results_kyber_vary_target_lat/rep_1/lat_log/r256-w256_sche_kyber_r_100ms_w_100ms_lat --log_avg_msec=1000 --name=1 --rw=randread --cpus_allowed=1 --iodepth=256 --name=2 --rw=randwrite --cpus_allowed=2 --iodepth=256 -o results_kyber_vary_target_lat/rep_1/fio_output/r256-w256_sche_kyber_r_100ms_w_100ms.txt
+b''
+b''
+sleep 5s
+b''
+b''
+umount /dev/nvme5n1
+b''
+b''
+nvme format -s 1 /dev/nvme5n1
+b'Success formatting namespace:1\n'
+b''
+mkfs.f2fs /dev/nvme5n1
+b'\n\tF2FS-tools: mkfs.f2fs Ver: 1.11.0 (2018-07-10)\n\nInfo: Disable heap-based policy\nInfo: Debug level = 0\nInfo: Label = \nInfo: Trim is enabled\nInfo: Segments per section = 1\nInfo: Sections per zone = 1\nInfo: sector size = 512\nInfo: total sectors = 1953525168 (953869 MB)\nInfo: zone aligned segment0 blkaddr: 512\nInfo: format version with\n  "Linux version 6.3.8-sched-expr (zebin@node5) (gcc (Ubuntu 10.5.0-1ubuntu1~20.04) 10.5.0, GNU ld (GNU Binutils for Ubuntu) 2.34) #2 SMP PREEMPT_DYNAMIC Wed Sep  6 14:33:29 CEST 2023"\nInfo: [/dev/nvme5n1] Discarding device\nInfo: This device doesn\'t support BLKSECDISCARD\nInfo: Discarded 953869 MB\nInfo: Overprovision ratio = 0.210%\nInfo: Overprovision segments = 1957 (GC reserved = 960)\nInfo: format successful\n'
+b''
+mount /dev/nvme5n1 /mnt/nvme_test/
+b''
+b''
+head -c 50G </dev/urandom >/mnt/nvme_test/fio_file
+b''
+b''
+sleep 10s
+b''
+b''
+modprobe -r kyber_iosched
+b''
+b''
+modprobe kyber_iosched
+b''
+b''
+Set parameter read_lat_nsec to 100000000
+Set parameter write_lat_nsec to 100000000
+exec bpftrace -e 'BEGIN {printf("start: %llu\n", nsecs)} tracepoint:kyber:kyber_adjust {printf("domain: %s, depth: %d, timestamp: %llu\n", args->domain, args->depth, nsecs)}' > results_kyber_vary_target_lat/rep_2/bpf_log/bpf_r256-w256_sche_kyber_r_100ms_w_100ms.txt
+sleep 10s
+b''
+b''
+/mnt/sdc/zebin/local/fio-3.35/fio --time_based=1 --ramp_time=360s --runtime=360s --ioengine=io_uring --registerfiles=1 --fixedbufs=1 --size=100% --norandommap=1 --group_reporting=1 --direct=1 --output-format=json --bs=4k --filename=/mnt/nvme_test/fio_file --write_iops_log=results_kyber_vary_target_lat/rep_2/iops_log/r256-w256_sche_kyber_r_100ms_w_100ms_iops --write_lat_log=results_kyber_vary_target_lat/rep_2/lat_log/r256-w256_sche_kyber_r_100ms_w_100ms_lat --log_avg_msec=1000 --name=1 --rw=randread --cpus_allowed=1 --iodepth=256 --name=2 --rw=randwrite --cpus_allowed=2 --iodepth=256 -o results_kyber_vary_target_lat/rep_2/fio_output/r256-w256_sche_kyber_r_100ms_w_100ms.txt
+b''
+b''
+sleep 5s
+b''
+b''
+umount /dev/nvme5n1
+b''
+b''
+nvme format -s 1 /dev/nvme5n1
+b'Success formatting namespace:1\n'
+b''
+mkfs.f2fs /dev/nvme5n1
+b'\n\tF2FS-tools: mkfs.f2fs Ver: 1.11.0 (2018-07-10)\n\nInfo: Disable heap-based policy\nInfo: Debug level = 0\nInfo: Label = \nInfo: Trim is enabled\nInfo: Segments per section = 1\nInfo: Sections per zone = 1\nInfo: sector size = 512\nInfo: total sectors = 1953525168 (953869 MB)\nInfo: zone aligned segment0 blkaddr: 512\nInfo: format version with\n  "Linux version 6.3.8-sched-expr (zebin@node5) (gcc (Ubuntu 10.5.0-1ubuntu1~20.04) 10.5.0, GNU ld (GNU Binutils for Ubuntu) 2.34) #2 SMP PREEMPT_DYNAMIC Wed Sep  6 14:33:29 CEST 2023"\nInfo: [/dev/nvme5n1] Discarding device\nInfo: This device doesn\'t support BLKSECDISCARD\nInfo: Discarded 953869 MB\nInfo: Overprovision ratio = 0.210%\nInfo: Overprovision segments = 1957 (GC reserved = 960)\nInfo: format successful\n'
+b''
+mount /dev/nvme5n1 /mnt/nvme_test/
+b''
+b''
+head -c 50G </dev/urandom >/mnt/nvme_test/fio_file
+b''
+b''
+sleep 10s
+b''
+b''
+modprobe -r kyber_iosched
+b''
+b''
+modprobe kyber_iosched
+b''
+b''
+Set parameter read_lat_nsec to 100000000
+Set parameter write_lat_nsec to 20000
+exec bpftrace -e 'BEGIN {printf("start: %llu\n", nsecs)} tracepoint:kyber:kyber_adjust {printf("domain: %s, depth: %d, timestamp: %llu\n", args->domain, args->depth, nsecs)}' > results_kyber_vary_target_lat/rep_2/bpf_log/bpf_r256-w256_sche_kyber_r_100ms_w_20us.txt
+sleep 10s
+b''
+b''
+/mnt/sdc/zebin/local/fio-3.35/fio --time_based=1 --ramp_time=360s --runtime=360s --ioengine=io_uring --registerfiles=1 --fixedbufs=1 --size=100% --norandommap=1 --group_reporting=1 --direct=1 --output-format=json --bs=4k --filename=/mnt/nvme_test/fio_file --write_iops_log=results_kyber_vary_target_lat/rep_2/iops_log/r256-w256_sche_kyber_r_100ms_w_20us_iops --write_lat_log=results_kyber_vary_target_lat/rep_2/lat_log/r256-w256_sche_kyber_r_100ms_w_20us_lat --log_avg_msec=1000 --name=1 --rw=randread --cpus_allowed=1 --iodepth=256 --name=2 --rw=randwrite --cpus_allowed=2 --iodepth=256 -o results_kyber_vary_target_lat/rep_2/fio_output/r256-w256_sche_kyber_r_100ms_w_20us.txt
+b''
+b''
+sleep 5s
+b''
+b''
+umount /dev/nvme5n1
+b''
+b''
+nvme format -s 1 /dev/nvme5n1
+b'Success formatting namespace:1\n'
+b''
+mkfs.f2fs /dev/nvme5n1
+b'\n\tF2FS-tools: mkfs.f2fs Ver: 1.11.0 (2018-07-10)\n\nInfo: Disable heap-based policy\nInfo: Debug level = 0\nInfo: Label = \nInfo: Trim is enabled\nInfo: Segments per section = 1\nInfo: Sections per zone = 1\nInfo: sector size = 512\nInfo: total sectors = 1953525168 (953869 MB)\nInfo: zone aligned segment0 blkaddr: 512\nInfo: format version with\n  "Linux version 6.3.8-sched-expr (zebin@node5) (gcc (Ubuntu 10.5.0-1ubuntu1~20.04) 10.5.0, GNU ld (GNU Binutils for Ubuntu) 2.34) #2 SMP PREEMPT_DYNAMIC Wed Sep  6 14:33:29 CEST 2023"\nInfo: [/dev/nvme5n1] Discarding device\nInfo: This device doesn\'t support BLKSECDISCARD\nInfo: Discarded 953869 MB\nInfo: Overprovision ratio = 0.210%\nInfo: Overprovision segments = 1957 (GC reserved = 960)\nInfo: format successful\n'
+b''
+mount /dev/nvme5n1 /mnt/nvme_test/
+b''
+b''
+head -c 50G </dev/urandom >/mnt/nvme_test/fio_file
+b''
+b''
+sleep 10s
+b''
+b''
+modprobe -r kyber_iosched
+b''
+b''
+modprobe kyber_iosched
+b''
+b''
+Set parameter read_lat_nsec to 50000
+Set parameter write_lat_nsec to 20000
+exec bpftrace -e 'BEGIN {printf("start: %llu\n", nsecs)} tracepoint:kyber:kyber_adjust {printf("domain: %s, depth: %d, timestamp: %llu\n", args->domain, args->depth, nsecs)}' > results_kyber_vary_target_lat/rep_2/bpf_log/bpf_r256-w256_sche_kyber_r_50us_w_20us.txt
+sleep 10s
+b''
+b''
+/mnt/sdc/zebin/local/fio-3.35/fio --time_based=1 --ramp_time=360s --runtime=360s --ioengine=io_uring --registerfiles=1 --fixedbufs=1 --size=100% --norandommap=1 --group_reporting=1 --direct=1 --output-format=json --bs=4k --filename=/mnt/nvme_test/fio_file --write_iops_log=results_kyber_vary_target_lat/rep_2/iops_log/r256-w256_sche_kyber_r_50us_w_20us_iops --write_lat_log=results_kyber_vary_target_lat/rep_2/lat_log/r256-w256_sche_kyber_r_50us_w_20us_lat --log_avg_msec=1000 --name=1 --rw=randread --cpus_allowed=1 --iodepth=256 --name=2 --rw=randwrite --cpus_allowed=2 --iodepth=256 -o results_kyber_vary_target_lat/rep_2/fio_output/r256-w256_sche_kyber_r_50us_w_20us.txt
+b''
+b''
+sleep 5s
+b''
+b''
+umount /dev/nvme5n1
+b''
+b''
+nvme format -s 1 /dev/nvme5n1
+b'Success formatting namespace:1\n'
+b''
+mkfs.f2fs /dev/nvme5n1
+b'\n\tF2FS-tools: mkfs.f2fs Ver: 1.11.0 (2018-07-10)\n\nInfo: Disable heap-based policy\nInfo: Debug level = 0\nInfo: Label = \nInfo: Trim is enabled\nInfo: Segments per section = 1\nInfo: Sections per zone = 1\nInfo: sector size = 512\nInfo: total sectors = 1953525168 (953869 MB)\nInfo: zone aligned segment0 blkaddr: 512\nInfo: format version with\n  "Linux version 6.3.8-sched-expr (zebin@node5) (gcc (Ubuntu 10.5.0-1ubuntu1~20.04) 10.5.0, GNU ld (GNU Binutils for Ubuntu) 2.34) #2 SMP PREEMPT_DYNAMIC Wed Sep  6 14:33:29 CEST 2023"\nInfo: [/dev/nvme5n1] Discarding device\nInfo: This device doesn\'t support BLKSECDISCARD\nInfo: Discarded 953869 MB\nInfo: Overprovision ratio = 0.210%\nInfo: Overprovision segments = 1957 (GC reserved = 960)\nInfo: format successful\n'
+b''
+mount /dev/nvme5n1 /mnt/nvme_test/
+b''
+b''
+head -c 50G </dev/urandom >/mnt/nvme_test/fio_file
+b''
+b''
+sleep 10s
+b''
+b''
+modprobe -r kyber_iosched
+b''
+b''
+modprobe kyber_iosched
+b''
+b''
+Set parameter read_lat_nsec to 50000
+Set parameter write_lat_nsec to 100000000
+exec bpftrace -e 'BEGIN {printf("start: %llu\n", nsecs)} tracepoint:kyber:kyber_adjust {printf("domain: %s, depth: %d, timestamp: %llu\n", args->domain, args->depth, nsecs)}' > results_kyber_vary_target_lat/rep_2/bpf_log/bpf_r256-w256_sche_kyber_r_50us_w_100ms.txt
+sleep 10s
+b''
+b''
+/mnt/sdc/zebin/local/fio-3.35/fio --time_based=1 --ramp_time=360s --runtime=360s --ioengine=io_uring --registerfiles=1 --fixedbufs=1 --size=100% --norandommap=1 --group_reporting=1 --direct=1 --output-format=json --bs=4k --filename=/mnt/nvme_test/fio_file --write_iops_log=results_kyber_vary_target_lat/rep_2/iops_log/r256-w256_sche_kyber_r_50us_w_100ms_iops --write_lat_log=results_kyber_vary_target_lat/rep_2/lat_log/r256-w256_sche_kyber_r_50us_w_100ms_lat --log_avg_msec=1000 --name=1 --rw=randread --cpus_allowed=1 --iodepth=256 --name=2 --rw=randwrite --cpus_allowed=2 --iodepth=256 -o results_kyber_vary_target_lat/rep_2/fio_output/r256-w256_sche_kyber_r_50us_w_100ms.txt
+b''
+b''
+sleep 5s
+b''
+b''
+umount /dev/nvme5n1
+b''
+b''
+nvme format -s 1 /dev/nvme5n1
+b'Success formatting namespace:1\n'
+b''
+mkfs.f2fs /dev/nvme5n1
+b'\n\tF2FS-tools: mkfs.f2fs Ver: 1.11.0 (2018-07-10)\n\nInfo: Disable heap-based policy\nInfo: Debug level = 0\nInfo: Label = \nInfo: Trim is enabled\nInfo: Segments per section = 1\nInfo: Sections per zone = 1\nInfo: sector size = 512\nInfo: total sectors = 1953525168 (953869 MB)\nInfo: zone aligned segment0 blkaddr: 512\nInfo: format version with\n  "Linux version 6.3.8-sched-expr (zebin@node5) (gcc (Ubuntu 10.5.0-1ubuntu1~20.04) 10.5.0, GNU ld (GNU Binutils for Ubuntu) 2.34) #2 SMP PREEMPT_DYNAMIC Wed Sep  6 14:33:29 CEST 2023"\nInfo: [/dev/nvme5n1] Discarding device\nInfo: This device doesn\'t support BLKSECDISCARD\nInfo: Discarded 953869 MB\nInfo: Overprovision ratio = 0.210%\nInfo: Overprovision segments = 1957 (GC reserved = 960)\nInfo: format successful\n'
+b''
+mount /dev/nvme5n1 /mnt/nvme_test/
+b''
+b''
+head -c 50G </dev/urandom >/mnt/nvme_test/fio_file
+b''
+b''
+sleep 10s
+b''
+b''
+modprobe -r kyber_iosched
+b''
+b''
+modprobe kyber_iosched
+b''
+b''
+Set parameter read_lat_nsec to 50000
+Set parameter write_lat_nsec to 100000000
+exec bpftrace -e 'BEGIN {printf("start: %llu\n", nsecs)} tracepoint:kyber:kyber_adjust {printf("domain: %s, depth: %d, timestamp: %llu\n", args->domain, args->depth, nsecs)}' > results_kyber_vary_target_lat/rep_3/bpf_log/bpf_r256-w256_sche_kyber_r_50us_w_100ms.txt
+sleep 10s
+b''
+b''
+/mnt/sdc/zebin/local/fio-3.35/fio --time_based=1 --ramp_time=360s --runtime=360s --ioengine=io_uring --registerfiles=1 --fixedbufs=1 --size=100% --norandommap=1 --group_reporting=1 --direct=1 --output-format=json --bs=4k --filename=/mnt/nvme_test/fio_file --write_iops_log=results_kyber_vary_target_lat/rep_3/iops_log/r256-w256_sche_kyber_r_50us_w_100ms_iops --write_lat_log=results_kyber_vary_target_lat/rep_3/lat_log/r256-w256_sche_kyber_r_50us_w_100ms_lat --log_avg_msec=1000 --name=1 --rw=randread --cpus_allowed=1 --iodepth=256 --name=2 --rw=randwrite --cpus_allowed=2 --iodepth=256 -o results_kyber_vary_target_lat/rep_3/fio_output/r256-w256_sche_kyber_r_50us_w_100ms.txt
+b''
+b''
+sleep 5s
+b''
+b''
+umount /dev/nvme5n1
+b''
+b''
+nvme format -s 1 /dev/nvme5n1
+b'Success formatting namespace:1\n'
+b''
+mkfs.f2fs /dev/nvme5n1
+b'\n\tF2FS-tools: mkfs.f2fs Ver: 1.11.0 (2018-07-10)\n\nInfo: Disable heap-based policy\nInfo: Debug level = 0\nInfo: Label = \nInfo: Trim is enabled\nInfo: Segments per section = 1\nInfo: Sections per zone = 1\nInfo: sector size = 512\nInfo: total sectors = 1953525168 (953869 MB)\nInfo: zone aligned segment0 blkaddr: 512\nInfo: format version with\n  "Linux version 6.3.8-sched-expr (zebin@node5) (gcc (Ubuntu 10.5.0-1ubuntu1~20.04) 10.5.0, GNU ld (GNU Binutils for Ubuntu) 2.34) #2 SMP PREEMPT_DYNAMIC Wed Sep  6 14:33:29 CEST 2023"\nInfo: [/dev/nvme5n1] Discarding device\nInfo: This device doesn\'t support BLKSECDISCARD\nInfo: Discarded 953869 MB\nInfo: Overprovision ratio = 0.210%\nInfo: Overprovision segments = 1957 (GC reserved = 960)\nInfo: format successful\n'
+b''
+mount /dev/nvme5n1 /mnt/nvme_test/
+b''
+b''
+head -c 50G </dev/urandom >/mnt/nvme_test/fio_file
+b''
+b''
+sleep 10s
+b''
+b''
+modprobe -r kyber_iosched
+b''
+b''
+modprobe kyber_iosched
+b''
+b''
+Set parameter read_lat_nsec to 50000
+Set parameter write_lat_nsec to 20000
+exec bpftrace -e 'BEGIN {printf("start: %llu\n", nsecs)} tracepoint:kyber:kyber_adjust {printf("domain: %s, depth: %d, timestamp: %llu\n", args->domain, args->depth, nsecs)}' > results_kyber_vary_target_lat/rep_3/bpf_log/bpf_r256-w256_sche_kyber_r_50us_w_20us.txt
+sleep 10s
+b''
+b''
+/mnt/sdc/zebin/local/fio-3.35/fio --time_based=1 --ramp_time=360s --runtime=360s --ioengine=io_uring --registerfiles=1 --fixedbufs=1 --size=100% --norandommap=1 --group_reporting=1 --direct=1 --output-format=json --bs=4k --filename=/mnt/nvme_test/fio_file --write_iops_log=results_kyber_vary_target_lat/rep_3/iops_log/r256-w256_sche_kyber_r_50us_w_20us_iops --write_lat_log=results_kyber_vary_target_lat/rep_3/lat_log/r256-w256_sche_kyber_r_50us_w_20us_lat --log_avg_msec=1000 --name=1 --rw=randread --cpus_allowed=1 --iodepth=256 --name=2 --rw=randwrite --cpus_allowed=2 --iodepth=256 -o results_kyber_vary_target_lat/rep_3/fio_output/r256-w256_sche_kyber_r_50us_w_20us.txt
+b''
+b''
+sleep 5s
+b''
+b''
+umount /dev/nvme5n1
+b''
+b''
+nvme format -s 1 /dev/nvme5n1
+b'Success formatting namespace:1\n'
+b''
+mkfs.f2fs /dev/nvme5n1
+b'\n\tF2FS-tools: mkfs.f2fs Ver: 1.11.0 (2018-07-10)\n\nInfo: Disable heap-based policy\nInfo: Debug level = 0\nInfo: Label = \nInfo: Trim is enabled\nInfo: Segments per section = 1\nInfo: Sections per zone = 1\nInfo: sector size = 512\nInfo: total sectors = 1953525168 (953869 MB)\nInfo: zone aligned segment0 blkaddr: 512\nInfo: format version with\n  "Linux version 6.3.8-sched-expr (zebin@node5) (gcc (Ubuntu 10.5.0-1ubuntu1~20.04) 10.5.0, GNU ld (GNU Binutils for Ubuntu) 2.34) #2 SMP PREEMPT_DYNAMIC Wed Sep  6 14:33:29 CEST 2023"\nInfo: [/dev/nvme5n1] Discarding device\nInfo: This device doesn\'t support BLKSECDISCARD\nInfo: Discarded 953869 MB\nInfo: Overprovision ratio = 0.210%\nInfo: Overprovision segments = 1957 (GC reserved = 960)\nInfo: format successful\n'
+b''
+mount /dev/nvme5n1 /mnt/nvme_test/
+b''
+b''
+head -c 50G </dev/urandom >/mnt/nvme_test/fio_file
+b''
+b''
+sleep 10s
+b''
+b''
+modprobe -r kyber_iosched
+b''
+b''
+modprobe kyber_iosched
+b''
+b''
+Set parameter read_lat_nsec to 100000000
+Set parameter write_lat_nsec to 100000000
+exec bpftrace -e 'BEGIN {printf("start: %llu\n", nsecs)} tracepoint:kyber:kyber_adjust {printf("domain: %s, depth: %d, timestamp: %llu\n", args->domain, args->depth, nsecs)}' > results_kyber_vary_target_lat/rep_3/bpf_log/bpf_r256-w256_sche_kyber_r_100ms_w_100ms.txt
+sleep 10s
+b''
+b''
+/mnt/sdc/zebin/local/fio-3.35/fio --time_based=1 --ramp_time=360s --runtime=360s --ioengine=io_uring --registerfiles=1 --fixedbufs=1 --size=100% --norandommap=1 --group_reporting=1 --direct=1 --output-format=json --bs=4k --filename=/mnt/nvme_test/fio_file --write_iops_log=results_kyber_vary_target_lat/rep_3/iops_log/r256-w256_sche_kyber_r_100ms_w_100ms_iops --write_lat_log=results_kyber_vary_target_lat/rep_3/lat_log/r256-w256_sche_kyber_r_100ms_w_100ms_lat --log_avg_msec=1000 --name=1 --rw=randread --cpus_allowed=1 --iodepth=256 --name=2 --rw=randwrite --cpus_allowed=2 --iodepth=256 -o results_kyber_vary_target_lat/rep_3/fio_output/r256-w256_sche_kyber_r_100ms_w_100ms.txt
+b''
+b''
+sleep 5s
+b''
+b''
+umount /dev/nvme5n1
+b''
+b''
+nvme format -s 1 /dev/nvme5n1
+b'Success formatting namespace:1\n'
+b''
+mkfs.f2fs /dev/nvme5n1
+b'\n\tF2FS-tools: mkfs.f2fs Ver: 1.11.0 (2018-07-10)\n\nInfo: Disable heap-based policy\nInfo: Debug level = 0\nInfo: Label = \nInfo: Trim is enabled\nInfo: Segments per section = 1\nInfo: Sections per zone = 1\nInfo: sector size = 512\nInfo: total sectors = 1953525168 (953869 MB)\nInfo: zone aligned segment0 blkaddr: 512\nInfo: format version with\n  "Linux version 6.3.8-sched-expr (zebin@node5) (gcc (Ubuntu 10.5.0-1ubuntu1~20.04) 10.5.0, GNU ld (GNU Binutils for Ubuntu) 2.34) #2 SMP PREEMPT_DYNAMIC Wed Sep  6 14:33:29 CEST 2023"\nInfo: [/dev/nvme5n1] Discarding device\nInfo: This device doesn\'t support BLKSECDISCARD\nInfo: Discarded 953869 MB\nInfo: Overprovision ratio = 0.210%\nInfo: Overprovision segments = 1957 (GC reserved = 960)\nInfo: format successful\n'
+b''
+mount /dev/nvme5n1 /mnt/nvme_test/
+b''
+b''
+head -c 50G </dev/urandom >/mnt/nvme_test/fio_file
+b''
+b''
+sleep 10s
+b''
+b''
+modprobe -r kyber_iosched
+b''
+b''
+modprobe kyber_iosched
+b''
+b''
+Set parameter read_lat_nsec to 100000000
+Set parameter write_lat_nsec to 20000
+exec bpftrace -e 'BEGIN {printf("start: %llu\n", nsecs)} tracepoint:kyber:kyber_adjust {printf("domain: %s, depth: %d, timestamp: %llu\n", args->domain, args->depth, nsecs)}' > results_kyber_vary_target_lat/rep_3/bpf_log/bpf_r256-w256_sche_kyber_r_100ms_w_20us.txt
+sleep 10s
+b''
+b''
+/mnt/sdc/zebin/local/fio-3.35/fio --time_based=1 --ramp_time=360s --runtime=360s --ioengine=io_uring --registerfiles=1 --fixedbufs=1 --size=100% --norandommap=1 --group_reporting=1 --direct=1 --output-format=json --bs=4k --filename=/mnt/nvme_test/fio_file --write_iops_log=results_kyber_vary_target_lat/rep_3/iops_log/r256-w256_sche_kyber_r_100ms_w_20us_iops --write_lat_log=results_kyber_vary_target_lat/rep_3/lat_log/r256-w256_sche_kyber_r_100ms_w_20us_lat --log_avg_msec=1000 --name=1 --rw=randread --cpus_allowed=1 --iodepth=256 --name=2 --rw=randwrite --cpus_allowed=2 --iodepth=256 -o results_kyber_vary_target_lat/rep_3/fio_output/r256-w256_sche_kyber_r_100ms_w_20us.txt
+b''
+b''
+sleep 5s
+b''
+b''
+umount /dev/nvme5n1
+b''
+b''
+nvme format -s 1 /dev/nvme5n1
+b'Success formatting namespace:1\n'
+b''
+mkfs.f2fs /dev/nvme5n1
+b'\n\tF2FS-tools: mkfs.f2fs Ver: 1.11.0 (2018-07-10)\n\nInfo: Disable heap-based policy\nInfo: Debug level = 0\nInfo: Label = \nInfo: Trim is enabled\nInfo: Segments per section = 1\nInfo: Sections per zone = 1\nInfo: sector size = 512\nInfo: total sectors = 1953525168 (953869 MB)\nInfo: zone aligned segment0 blkaddr: 512\nInfo: format version with\n  "Linux version 6.3.8-sched-expr (zebin@node5) (gcc (Ubuntu 10.5.0-1ubuntu1~20.04) 10.5.0, GNU ld (GNU Binutils for Ubuntu) 2.34) #2 SMP PREEMPT_DYNAMIC Wed Sep  6 14:33:29 CEST 2023"\nInfo: [/dev/nvme5n1] Discarding device\nInfo: This device doesn\'t support BLKSECDISCARD\nInfo: Discarded 953869 MB\nInfo: Overprovision ratio = 0.210%\nInfo: Overprovision segments = 1957 (GC reserved = 960)\nInfo: format successful\n'
+b''
+mount /dev/nvme5n1 /mnt/nvme_test/
+b''
+b''
+head -c 50G </dev/urandom >/mnt/nvme_test/fio_file
+b''
+b''
+sleep 10s
+b''
+b''
+modprobe -r kyber_iosched
+b''
+b''
+modprobe kyber_iosched
+b''
+b''
+Set parameter read_lat_nsec to 100000000
+Set parameter write_lat_nsec to 20000
+exec bpftrace -e 'BEGIN {printf("start: %llu\n", nsecs)} tracepoint:kyber:kyber_adjust {printf("domain: %s, depth: %d, timestamp: %llu\n", args->domain, args->depth, nsecs)}' > results_kyber_vary_target_lat/rep_4/bpf_log/bpf_r256-w256_sche_kyber_r_100ms_w_20us.txt
+sleep 10s
+b''
+b''
+/mnt/sdc/zebin/local/fio-3.35/fio --time_based=1 --ramp_time=360s --runtime=360s --ioengine=io_uring --registerfiles=1 --fixedbufs=1 --size=100% --norandommap=1 --group_reporting=1 --direct=1 --output-format=json --bs=4k --filename=/mnt/nvme_test/fio_file --write_iops_log=results_kyber_vary_target_lat/rep_4/iops_log/r256-w256_sche_kyber_r_100ms_w_20us_iops --write_lat_log=results_kyber_vary_target_lat/rep_4/lat_log/r256-w256_sche_kyber_r_100ms_w_20us_lat --log_avg_msec=1000 --name=1 --rw=randread --cpus_allowed=1 --iodepth=256 --name=2 --rw=randwrite --cpus_allowed=2 --iodepth=256 -o results_kyber_vary_target_lat/rep_4/fio_output/r256-w256_sche_kyber_r_100ms_w_20us.txt
+b''
+b''
+sleep 5s
+b''
+b''
+umount /dev/nvme5n1
+b''
+b''
+nvme format -s 1 /dev/nvme5n1
+b'Success formatting namespace:1\n'
+b''
+mkfs.f2fs /dev/nvme5n1
+b'\n\tF2FS-tools: mkfs.f2fs Ver: 1.11.0 (2018-07-10)\n\nInfo: Disable heap-based policy\nInfo: Debug level = 0\nInfo: Label = \nInfo: Trim is enabled\nInfo: Segments per section = 1\nInfo: Sections per zone = 1\nInfo: sector size = 512\nInfo: total sectors = 1953525168 (953869 MB)\nInfo: zone aligned segment0 blkaddr: 512\nInfo: format version with\n  "Linux version 6.3.8-sched-expr (zebin@node5) (gcc (Ubuntu 10.5.0-1ubuntu1~20.04) 10.5.0, GNU ld (GNU Binutils for Ubuntu) 2.34) #2 SMP PREEMPT_DYNAMIC Wed Sep  6 14:33:29 CEST 2023"\nInfo: [/dev/nvme5n1] Discarding device\nInfo: This device doesn\'t support BLKSECDISCARD\nInfo: Discarded 953869 MB\nInfo: Overprovision ratio = 0.210%\nInfo: Overprovision segments = 1957 (GC reserved = 960)\nInfo: format successful\n'
+b''
+mount /dev/nvme5n1 /mnt/nvme_test/
+b''
+b''
+head -c 50G </dev/urandom >/mnt/nvme_test/fio_file
+b''
+b''
+sleep 10s
+b''
+b''
+modprobe -r kyber_iosched
+b''
+b''
+modprobe kyber_iosched
+b''
+b''
+Set parameter read_lat_nsec to 100000000
+Set parameter write_lat_nsec to 100000000
+exec bpftrace -e 'BEGIN {printf("start: %llu\n", nsecs)} tracepoint:kyber:kyber_adjust {printf("domain: %s, depth: %d, timestamp: %llu\n", args->domain, args->depth, nsecs)}' > results_kyber_vary_target_lat/rep_4/bpf_log/bpf_r256-w256_sche_kyber_r_100ms_w_100ms.txt
+sleep 10s
+b''
+b''
+/mnt/sdc/zebin/local/fio-3.35/fio --time_based=1 --ramp_time=360s --runtime=360s --ioengine=io_uring --registerfiles=1 --fixedbufs=1 --size=100% --norandommap=1 --group_reporting=1 --direct=1 --output-format=json --bs=4k --filename=/mnt/nvme_test/fio_file --write_iops_log=results_kyber_vary_target_lat/rep_4/iops_log/r256-w256_sche_kyber_r_100ms_w_100ms_iops --write_lat_log=results_kyber_vary_target_lat/rep_4/lat_log/r256-w256_sche_kyber_r_100ms_w_100ms_lat --log_avg_msec=1000 --name=1 --rw=randread --cpus_allowed=1 --iodepth=256 --name=2 --rw=randwrite --cpus_allowed=2 --iodepth=256 -o results_kyber_vary_target_lat/rep_4/fio_output/r256-w256_sche_kyber_r_100ms_w_100ms.txt
+b''
+b''
+sleep 5s
+b''
+b''
+umount /dev/nvme5n1
+b''
+b''
+nvme format -s 1 /dev/nvme5n1
+b'Success formatting namespace:1\n'
+b''
+mkfs.f2fs /dev/nvme5n1
+b'\n\tF2FS-tools: mkfs.f2fs Ver: 1.11.0 (2018-07-10)\n\nInfo: Disable heap-based policy\nInfo: Debug level = 0\nInfo: Label = \nInfo: Trim is enabled\nInfo: Segments per section = 1\nInfo: Sections per zone = 1\nInfo: sector size = 512\nInfo: total sectors = 1953525168 (953869 MB)\nInfo: zone aligned segment0 blkaddr: 512\nInfo: format version with\n  "Linux version 6.3.8-sched-expr (zebin@node5) (gcc (Ubuntu 10.5.0-1ubuntu1~20.04) 10.5.0, GNU ld (GNU Binutils for Ubuntu) 2.34) #2 SMP PREEMPT_DYNAMIC Wed Sep  6 14:33:29 CEST 2023"\nInfo: [/dev/nvme5n1] Discarding device\nInfo: This device doesn\'t support BLKSECDISCARD\nInfo: Discarded 953869 MB\nInfo: Overprovision ratio = 0.210%\nInfo: Overprovision segments = 1957 (GC reserved = 960)\nInfo: format successful\n'
+b''
+mount /dev/nvme5n1 /mnt/nvme_test/
+b''
+b''
+head -c 50G </dev/urandom >/mnt/nvme_test/fio_file
+b''
+b''
+sleep 10s
+b''
+b''
+modprobe -r kyber_iosched
+b''
+b''
+modprobe kyber_iosched
+b''
+b''
+Set parameter read_lat_nsec to 50000
+Set parameter write_lat_nsec to 20000
+exec bpftrace -e 'BEGIN {printf("start: %llu\n", nsecs)} tracepoint:kyber:kyber_adjust {printf("domain: %s, depth: %d, timestamp: %llu\n", args->domain, args->depth, nsecs)}' > results_kyber_vary_target_lat/rep_4/bpf_log/bpf_r256-w256_sche_kyber_r_50us_w_20us.txt
+sleep 10s
+b''
+b''
+/mnt/sdc/zebin/local/fio-3.35/fio --time_based=1 --ramp_time=360s --runtime=360s --ioengine=io_uring --registerfiles=1 --fixedbufs=1 --size=100% --norandommap=1 --group_reporting=1 --direct=1 --output-format=json --bs=4k --filename=/mnt/nvme_test/fio_file --write_iops_log=results_kyber_vary_target_lat/rep_4/iops_log/r256-w256_sche_kyber_r_50us_w_20us_iops --write_lat_log=results_kyber_vary_target_lat/rep_4/lat_log/r256-w256_sche_kyber_r_50us_w_20us_lat --log_avg_msec=1000 --name=1 --rw=randread --cpus_allowed=1 --iodepth=256 --name=2 --rw=randwrite --cpus_allowed=2 --iodepth=256 -o results_kyber_vary_target_lat/rep_4/fio_output/r256-w256_sche_kyber_r_50us_w_20us.txt
+b''
+b''
+sleep 5s
+b''
+b''
+umount /dev/nvme5n1
+b''
+b''
+nvme format -s 1 /dev/nvme5n1
+b'Success formatting namespace:1\n'
+b''
+mkfs.f2fs /dev/nvme5n1
+b'\n\tF2FS-tools: mkfs.f2fs Ver: 1.11.0 (2018-07-10)\n\nInfo: Disable heap-based policy\nInfo: Debug level = 0\nInfo: Label = \nInfo: Trim is enabled\nInfo: Segments per section = 1\nInfo: Sections per zone = 1\nInfo: sector size = 512\nInfo: total sectors = 1953525168 (953869 MB)\nInfo: zone aligned segment0 blkaddr: 512\nInfo: format version with\n  "Linux version 6.3.8-sched-expr (zebin@node5) (gcc (Ubuntu 10.5.0-1ubuntu1~20.04) 10.5.0, GNU ld (GNU Binutils for Ubuntu) 2.34) #2 SMP PREEMPT_DYNAMIC Wed Sep  6 14:33:29 CEST 2023"\nInfo: [/dev/nvme5n1] Discarding device\nInfo: This device doesn\'t support BLKSECDISCARD\nInfo: Discarded 953869 MB\nInfo: Overprovision ratio = 0.210%\nInfo: Overprovision segments = 1957 (GC reserved = 960)\nInfo: format successful\n'
+b''
+mount /dev/nvme5n1 /mnt/nvme_test/
+b''
+b''
+head -c 50G </dev/urandom >/mnt/nvme_test/fio_file
+b''
+b''
+sleep 10s
+b''
+b''
+modprobe -r kyber_iosched
+b''
+b''
+modprobe kyber_iosched
+b''
+b''
+Set parameter read_lat_nsec to 50000
+Set parameter write_lat_nsec to 100000000
+exec bpftrace -e 'BEGIN {printf("start: %llu\n", nsecs)} tracepoint:kyber:kyber_adjust {printf("domain: %s, depth: %d, timestamp: %llu\n", args->domain, args->depth, nsecs)}' > results_kyber_vary_target_lat/rep_4/bpf_log/bpf_r256-w256_sche_kyber_r_50us_w_100ms.txt
+sleep 10s
+b''
+b''
+/mnt/sdc/zebin/local/fio-3.35/fio --time_based=1 --ramp_time=360s --runtime=360s --ioengine=io_uring --registerfiles=1 --fixedbufs=1 --size=100% --norandommap=1 --group_reporting=1 --direct=1 --output-format=json --bs=4k --filename=/mnt/nvme_test/fio_file --write_iops_log=results_kyber_vary_target_lat/rep_4/iops_log/r256-w256_sche_kyber_r_50us_w_100ms_iops --write_lat_log=results_kyber_vary_target_lat/rep_4/lat_log/r256-w256_sche_kyber_r_50us_w_100ms_lat --log_avg_msec=1000 --name=1 --rw=randread --cpus_allowed=1 --iodepth=256 --name=2 --rw=randwrite --cpus_allowed=2 --iodepth=256 -o results_kyber_vary_target_lat/rep_4/fio_output/r256-w256_sche_kyber_r_50us_w_100ms.txt
+b''
+b''
+sleep 5s
+b''
+b''
+###########Result without std###########
+READ IOPS
+& 20us & 100ms
+50us & 234.4 & 239.3 & \\
+100ms & 229.7 & 239.1 & \\
+
+WRITE IOPS
+& 20us & 100ms
+50us & 104.3 & 67.9 & \\
+100ms & 107.8 & 108.7 & \\
+
+READ latency in ms
+& 20us & 100ms
+50us & 2.1 & 1.9 & \\
+100ms & 2.0 & 2.1 & \\
+
+Write latency in ms
+& 20us & 100ms
+50us & 2.5 & 3.9 & \\
+100ms & 2.4 & 2.4 & \\
+
+###########Result with std###########
+READ IOPS
+& 20us & 100ms
+50us & 234.4 (5.0) & 239.3 (1.7) & \\
+100ms & 229.7 (2.2) & 239.1 (2.1) & \\
+
+WRITE IOPS
+& 20us & 100ms
+50us & 104.3 (0.9) & 67.9 (0.3) & \\
+100ms & 107.8 (1.0) & 108.7 (0.4) & \\
+
+READ latency in ms
+& 20us & 100ms
+50us & 2.1 (0.0) & 1.9 (0.0) & \\
+100ms & 2.0 (0.0) & 2.1 (0.0) & \\
+
+Write latency in ms
+& 20us & 100ms
+50us & 2.5 (0.0) & 3.9 (0.0) & \\
+100ms & 2.4 (0.0) & 2.4 (0.0) & \\
+

@@ -1,0 +1,35 @@
+{'run': False, 'print_only': False}
+###########Result without std###########
+READ IOPS
+& 0
+0 & 15.4 & \\
+
+WRITE IOPS
+& 0
+0 & 135.8 & \\
+
+READ latency in us
+& 0
+0 & 212.8 & \\
+
+Write latency in ms
+& 0
+0 & 2.0 & \\
+
+###########Result with std###########
+READ IOPS
+& 0
+0 & 15.4 (0.0) & \\
+
+WRITE IOPS
+& 0
+0 & 135.8 (1.2) & \\
+
+READ latency in ms
+& 0
+0 & 0.2 (0.0) & \\
+
+Write latency in ms
+& 0
+0 & 2.0 (0.0) & \\
+

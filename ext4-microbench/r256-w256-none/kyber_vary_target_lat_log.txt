@@ -1,0 +1,248 @@
+nohup: ignoring input
+Success formatting namespace:1
+mke2fs 1.45.5 (07-Jan-2020)
+Discarding device blocks:      4096/244190646140513280/244190646                   done                            
+Creating filesystem with 244190646 4k blocks and 61054976 inodes
+Filesystem UUID: ebae20c5-c2e1-42c1-9a64-1b3319c10ff5
+Superblock backups stored on blocks: 
+	32768, 98304, 163840, 229376, 294912, 819200, 884736, 1605632, 2654208, 
+	4096000, 7962624, 11239424, 20480000, 23887872, 71663616, 78675968, 
+	102400000, 214990848
+
+Allocating group tables:    0/7453         done                            
+Writing inode tables:    0/7453         done                            
+Creating journal (262144 blocks): done
+Writing superblocks and filesystem accounting information:    0/7453         done
+
+Success formatting namespace:1
+mke2fs 1.45.5 (07-Jan-2020)
+Discarding device blocks:      4096/244190646112726016/244190646                   done                            
+Creating filesystem with 244190646 4k blocks and 61054976 inodes
+Filesystem UUID: c57f497b-d003-40df-b570-cc3b7aab6ef7
+Superblock backups stored on blocks: 
+	32768, 98304, 163840, 229376, 294912, 819200, 884736, 1605632, 2654208, 
+	4096000, 7962624, 11239424, 20480000, 23887872, 71663616, 78675968, 
+	102400000, 214990848
+
+Allocating group tables:    0/7453         done                            
+Writing inode tables:    0/7453         done                            
+Creating journal (262144 blocks): done
+Writing superblocks and filesystem accounting information:    0/7453         done
+
+Success formatting namespace:1
+mke2fs 1.45.5 (07-Jan-2020)
+Discarding device blocks:      4096/244190646102240256/244190646                   done                            
+Creating filesystem with 244190646 4k blocks and 61054976 inodes
+Filesystem UUID: b765da64-43c9-4a66-a598-9de883a98671
+Superblock backups stored on blocks: 
+	32768, 98304, 163840, 229376, 294912, 819200, 884736, 1605632, 2654208, 
+	4096000, 7962624, 11239424, 20480000, 23887872, 71663616, 78675968, 
+	102400000, 214990848
+
+Allocating group tables:    0/7453         done                            
+Writing inode tables:    0/7453         done                            
+Creating journal (262144 blocks): done
+Writing superblocks and filesystem accounting information:    0/7453         done
+
+Success formatting namespace:1
+mke2fs 1.45.5 (07-Jan-2020)
+Discarding device blocks:      4096/244190646 93327360/244190646                   done                            
+Creating filesystem with 244190646 4k blocks and 61054976 inodes
+Filesystem UUID: b8c84f29-19e9-4934-97d5-1a6e86e10346
+Superblock backups stored on blocks: 
+	32768, 98304, 163840, 229376, 294912, 819200, 884736, 1605632, 2654208, 
+	4096000, 7962624, 11239424, 20480000, 23887872, 71663616, 78675968, 
+	102400000, 214990848
+
+Allocating group tables:    0/7453         done                            
+Writing inode tables:    0/7453         done                            
+Creating journal (262144 blocks): done
+Writing superblocks and filesystem accounting information:    0/7453         done
+
+Success formatting namespace:1
+mke2fs 1.45.5 (07-Jan-2020)
+Discarding device blocks:      4096/244190646233312256/244190646                   done                            
+Creating filesystem with 244190646 4k blocks and 61054976 inodes
+Filesystem UUID: aca0983b-e362-491b-83e9-44f00446e6ec
+Superblock backups stored on blocks: 
+	32768, 98304, 163840, 229376, 294912, 819200, 884736, 1605632, 2654208, 
+	4096000, 7962624, 11239424, 20480000, 23887872, 71663616, 78675968, 
+	102400000, 214990848
+
+Allocating group tables:    0/7453         done                            
+Writing inode tables:    0/7453         done                            
+Creating journal (262144 blocks): done
+Writing superblocks and filesystem accounting information:    0/7453         done
+
+{'run': True, 'print_only': False}
+umount /dev/nvme5n1
+None
+None
+nvme format -s 1 /dev/nvme5n1
+None
+None
+mkfs.ext4 /dev/nvme5n1
+None
+None
+mount /dev/nvme5n1 /mnt/nvme_test/
+None
+None
+head -c 50G </dev/urandom >/mnt/nvme_test/fio_file
+None
+None
+exec bpftrace -e 'BEGIN {printf("start: %llu\n", nsecs)} tracepoint:kyber:kyber_adjust {printf("domain: %s, depth: %d, timestamp: %llu\n", args->domain, args->depth, nsecs)}' > results_kyber_vary_target_lat/rep_0/bpf_log/bpf_r256-w256_sche_none_r_0_w_0.txt
+sleep 10s
+None
+None
+/mnt/sdc/zebin/local/fio-3.35/fio --time_based=1 --ramp_time=360s --runtime=360s --ioengine=io_uring --registerfiles=1 --fixedbufs=1 --size=100% --norandommap=1 --group_reporting=1 --direct=1 --output-format=json --bs=4k --filename=/mnt/nvme_test/fio_file --write_iops_log=results_kyber_vary_target_lat/rep_0/iops_log/r256-w256_sche_none_r_0_w_0_iops --write_lat_log=results_kyber_vary_target_lat/rep_0/lat_log/r256-w256_sche_none_r_0_w_0_lat --log_avg_msec=1000 --name=1 --rw=randread --cpus_allowed=1 --iodepth=256 --name=2 --rw=randwrite --cpus_allowed=2 --iodepth=256 -o results_kyber_vary_target_lat/rep_0/fio_output/r256-w256_sche_none_r_0_w_0.txt
+None
+None
+sleep 5s
+None
+None
+umount /dev/nvme5n1
+None
+None
+nvme format -s 1 /dev/nvme5n1
+None
+None
+mkfs.ext4 /dev/nvme5n1
+None
+None
+mount /dev/nvme5n1 /mnt/nvme_test/
+None
+None
+head -c 50G </dev/urandom >/mnt/nvme_test/fio_file
+None
+None
+exec bpftrace -e 'BEGIN {printf("start: %llu\n", nsecs)} tracepoint:kyber:kyber_adjust {printf("domain: %s, depth: %d, timestamp: %llu\n", args->domain, args->depth, nsecs)}' > results_kyber_vary_target_lat/rep_1/bpf_log/bpf_r256-w256_sche_none_r_0_w_0.txt
+sleep 10s
+None
+None
+/mnt/sdc/zebin/local/fio-3.35/fio --time_based=1 --ramp_time=360s --runtime=360s --ioengine=io_uring --registerfiles=1 --fixedbufs=1 --size=100% --norandommap=1 --group_reporting=1 --direct=1 --output-format=json --bs=4k --filename=/mnt/nvme_test/fio_file --write_iops_log=results_kyber_vary_target_lat/rep_1/iops_log/r256-w256_sche_none_r_0_w_0_iops --write_lat_log=results_kyber_vary_target_lat/rep_1/lat_log/r256-w256_sche_none_r_0_w_0_lat --log_avg_msec=1000 --name=1 --rw=randread --cpus_allowed=1 --iodepth=256 --name=2 --rw=randwrite --cpus_allowed=2 --iodepth=256 -o results_kyber_vary_target_lat/rep_1/fio_output/r256-w256_sche_none_r_0_w_0.txt
+None
+None
+sleep 5s
+None
+None
+umount /dev/nvme5n1
+None
+None
+nvme format -s 1 /dev/nvme5n1
+None
+None
+mkfs.ext4 /dev/nvme5n1
+None
+None
+mount /dev/nvme5n1 /mnt/nvme_test/
+None
+None
+head -c 50G </dev/urandom >/mnt/nvme_test/fio_file
+None
+None
+exec bpftrace -e 'BEGIN {printf("start: %llu\n", nsecs)} tracepoint:kyber:kyber_adjust {printf("domain: %s, depth: %d, timestamp: %llu\n", args->domain, args->depth, nsecs)}' > results_kyber_vary_target_lat/rep_2/bpf_log/bpf_r256-w256_sche_none_r_0_w_0.txt
+sleep 10s
+None
+None
+/mnt/sdc/zebin/local/fio-3.35/fio --time_based=1 --ramp_time=360s --runtime=360s --ioengine=io_uring --registerfiles=1 --fixedbufs=1 --size=100% --norandommap=1 --group_reporting=1 --direct=1 --output-format=json --bs=4k --filename=/mnt/nvme_test/fio_file --write_iops_log=results_kyber_vary_target_lat/rep_2/iops_log/r256-w256_sche_none_r_0_w_0_iops --write_lat_log=results_kyber_vary_target_lat/rep_2/lat_log/r256-w256_sche_none_r_0_w_0_lat --log_avg_msec=1000 --name=1 --rw=randread --cpus_allowed=1 --iodepth=256 --name=2 --rw=randwrite --cpus_allowed=2 --iodepth=256 -o results_kyber_vary_target_lat/rep_2/fio_output/r256-w256_sche_none_r_0_w_0.txt
+None
+None
+sleep 5s
+None
+None
+umount /dev/nvme5n1
+None
+None
+nvme format -s 1 /dev/nvme5n1
+None
+None
+mkfs.ext4 /dev/nvme5n1
+None
+None
+mount /dev/nvme5n1 /mnt/nvme_test/
+None
+None
+head -c 50G </dev/urandom >/mnt/nvme_test/fio_file
+None
+None
+exec bpftrace -e 'BEGIN {printf("start: %llu\n", nsecs)} tracepoint:kyber:kyber_adjust {printf("domain: %s, depth: %d, timestamp: %llu\n", args->domain, args->depth, nsecs)}' > results_kyber_vary_target_lat/rep_3/bpf_log/bpf_r256-w256_sche_none_r_0_w_0.txt
+sleep 10s
+None
+None
+/mnt/sdc/zebin/local/fio-3.35/fio --time_based=1 --ramp_time=360s --runtime=360s --ioengine=io_uring --registerfiles=1 --fixedbufs=1 --size=100% --norandommap=1 --group_reporting=1 --direct=1 --output-format=json --bs=4k --filename=/mnt/nvme_test/fio_file --write_iops_log=results_kyber_vary_target_lat/rep_3/iops_log/r256-w256_sche_none_r_0_w_0_iops --write_lat_log=results_kyber_vary_target_lat/rep_3/lat_log/r256-w256_sche_none_r_0_w_0_lat --log_avg_msec=1000 --name=1 --rw=randread --cpus_allowed=1 --iodepth=256 --name=2 --rw=randwrite --cpus_allowed=2 --iodepth=256 -o results_kyber_vary_target_lat/rep_3/fio_output/r256-w256_sche_none_r_0_w_0.txt
+None
+None
+sleep 5s
+None
+None
+umount /dev/nvme5n1
+None
+None
+nvme format -s 1 /dev/nvme5n1
+None
+None
+mkfs.ext4 /dev/nvme5n1
+None
+None
+mount /dev/nvme5n1 /mnt/nvme_test/
+None
+None
+head -c 50G </dev/urandom >/mnt/nvme_test/fio_file
+None
+None
+exec bpftrace -e 'BEGIN {printf("start: %llu\n", nsecs)} tracepoint:kyber:kyber_adjust {printf("domain: %s, depth: %d, timestamp: %llu\n", args->domain, args->depth, nsecs)}' > results_kyber_vary_target_lat/rep_4/bpf_log/bpf_r256-w256_sche_none_r_0_w_0.txt
+sleep 10s
+None
+None
+/mnt/sdc/zebin/local/fio-3.35/fio --time_based=1 --ramp_time=360s --runtime=360s --ioengine=io_uring --registerfiles=1 --fixedbufs=1 --size=100% --norandommap=1 --group_reporting=1 --direct=1 --output-format=json --bs=4k --filename=/mnt/nvme_test/fio_file --write_iops_log=results_kyber_vary_target_lat/rep_4/iops_log/r256-w256_sche_none_r_0_w_0_iops --write_lat_log=results_kyber_vary_target_lat/rep_4/lat_log/r256-w256_sche_none_r_0_w_0_lat --log_avg_msec=1000 --name=1 --rw=randread --cpus_allowed=1 --iodepth=256 --name=2 --rw=randwrite --cpus_allowed=2 --iodepth=256 -o results_kyber_vary_target_lat/rep_4/fio_output/r256-w256_sche_none_r_0_w_0.txt
+None
+None
+sleep 5s
+None
+None
+###########Result without std###########
+READ IOPS
+& 0
+0 & 274.8 & \\
+
+WRITE IOPS
+& 0
+0 & 147.0 & \\
+
+READ latency in ms
+& 0
+0 & 2.0 & \\
+
+Write latency in ms
+& 0
+0 & 1.8 & \\
+
+###########Result with std###########
+READ IOPS
+& 0
+0 & 274.8 (6.4) & \\
+
+WRITE IOPS
+& 0
+0 & 147.0 (3.6) & \\
+
+READ latency in ms
+& 0
+0 & 2.0 (0.0) & \\
+
+Write latency in ms
+& 0
+0 & 1.8 (0.0) & \\
+
+Traceback (most recent call last):
+  File "kyber_vary_target_lat.py", line 630, in <module>
+    ax.set_xticks(np.arange(len(write_target_latencies_ticks)),
+  File "/usr/local/lib/python3.8/dist-packages/matplotlib/axes/_base.py", line 74, in wrapper
+    return get_method(self)(*args, **kwargs)
+  File "/usr/local/lib/python3.8/dist-packages/matplotlib/axis.py", line 2076, in set_ticks
+    self.set_ticklabels(labels, minor=minor, **kwargs)
+  File "/usr/local/lib/python3.8/dist-packages/matplotlib/_api/deprecation.py", line 297, in wrapper
+    return func(*args, **kwargs)
+  File "/usr/local/lib/python3.8/dist-packages/matplotlib/axis.py", line 1969, in set_ticklabels
+    raise ValueError(
+ValueError: The number of FixedLocator locations (1), usually from a call to set_ticks, does not match the number of labels (2).

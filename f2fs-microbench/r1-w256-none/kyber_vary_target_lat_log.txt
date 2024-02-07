@@ -1,0 +1,278 @@
+nohup: ignoring input
+Success formatting namespace:1
+
+	F2FS-tools: mkfs.f2fs Ver: 1.11.0 (2018-07-10)
+
+Info: Disable heap-based policy
+Info: Debug level = 0
+Info: Label = 
+Info: Trim is enabled
+Info: Segments per section = 1
+Info: Sections per zone = 1
+Info: sector size = 512
+Info: total sectors = 1953525168 (953869 MB)
+Info: zone aligned segment0 blkaddr: 512
+Info: format version with
+  "Linux version 6.3.8-sched-expr (zebin@node5) (gcc (Ubuntu 10.5.0-1ubuntu1~20.04) 10.5.0, GNU ld (GNU Binutils for Ubuntu) 2.34) #2 SMP PREEMPT_DYNAMIC Wed Sep  6 14:33:29 CEST 2023"
+Info: [/dev/nvme5n1] Discarding device
+Info: This device doesn't support BLKSECDISCARD
+Info: Discarded 953869 MB
+Info: Overprovision ratio = 0.210%
+Info: Overprovision segments = 1957 (GC reserved = 960)
+Info: format successful
+Success formatting namespace:1
+
+	F2FS-tools: mkfs.f2fs Ver: 1.11.0 (2018-07-10)
+
+Info: Disable heap-based policy
+Info: Debug level = 0
+Info: Label = 
+Info: Trim is enabled
+Info: Segments per section = 1
+Info: Sections per zone = 1
+Info: sector size = 512
+Info: total sectors = 1953525168 (953869 MB)
+Info: zone aligned segment0 blkaddr: 512
+Info: format version with
+  "Linux version 6.3.8-sched-expr (zebin@node5) (gcc (Ubuntu 10.5.0-1ubuntu1~20.04) 10.5.0, GNU ld (GNU Binutils for Ubuntu) 2.34) #2 SMP PREEMPT_DYNAMIC Wed Sep  6 14:33:29 CEST 2023"
+Info: [/dev/nvme5n1] Discarding device
+Info: This device doesn't support BLKSECDISCARD
+Info: Discarded 953869 MB
+Info: Overprovision ratio = 0.210%
+Info: Overprovision segments = 1957 (GC reserved = 960)
+Info: format successful
+Success formatting namespace:1
+
+	F2FS-tools: mkfs.f2fs Ver: 1.11.0 (2018-07-10)
+
+Info: Disable heap-based policy
+Info: Debug level = 0
+Info: Label = 
+Info: Trim is enabled
+Info: Segments per section = 1
+Info: Sections per zone = 1
+Info: sector size = 512
+Info: total sectors = 1953525168 (953869 MB)
+Info: zone aligned segment0 blkaddr: 512
+Info: format version with
+  "Linux version 6.3.8-sched-expr (zebin@node5) (gcc (Ubuntu 10.5.0-1ubuntu1~20.04) 10.5.0, GNU ld (GNU Binutils for Ubuntu) 2.34) #2 SMP PREEMPT_DYNAMIC Wed Sep  6 14:33:29 CEST 2023"
+Info: [/dev/nvme5n1] Discarding device
+Info: This device doesn't support BLKSECDISCARD
+Info: Discarded 953869 MB
+Info: Overprovision ratio = 0.210%
+Info: Overprovision segments = 1957 (GC reserved = 960)
+Info: format successful
+Success formatting namespace:1
+
+	F2FS-tools: mkfs.f2fs Ver: 1.11.0 (2018-07-10)
+
+Info: Disable heap-based policy
+Info: Debug level = 0
+Info: Label = 
+Info: Trim is enabled
+Info: Segments per section = 1
+Info: Sections per zone = 1
+Info: sector size = 512
+Info: total sectors = 1953525168 (953869 MB)
+Info: zone aligned segment0 blkaddr: 512
+Info: format version with
+  "Linux version 6.3.8-sched-expr (zebin@node5) (gcc (Ubuntu 10.5.0-1ubuntu1~20.04) 10.5.0, GNU ld (GNU Binutils for Ubuntu) 2.34) #2 SMP PREEMPT_DYNAMIC Wed Sep  6 14:33:29 CEST 2023"
+Info: [/dev/nvme5n1] Discarding device
+Info: This device doesn't support BLKSECDISCARD
+Info: Discarded 953869 MB
+Info: Overprovision ratio = 0.210%
+Info: Overprovision segments = 1957 (GC reserved = 960)
+Info: format successful
+Success formatting namespace:1
+
+	F2FS-tools: mkfs.f2fs Ver: 1.11.0 (2018-07-10)
+
+Info: Disable heap-based policy
+Info: Debug level = 0
+Info: Label = 
+Info: Trim is enabled
+Info: Segments per section = 1
+Info: Sections per zone = 1
+Info: sector size = 512
+Info: total sectors = 1953525168 (953869 MB)
+Info: zone aligned segment0 blkaddr: 512
+Info: format version with
+  "Linux version 6.3.8-sched-expr (zebin@node5) (gcc (Ubuntu 10.5.0-1ubuntu1~20.04) 10.5.0, GNU ld (GNU Binutils for Ubuntu) 2.34) #2 SMP PREEMPT_DYNAMIC Wed Sep  6 14:33:29 CEST 2023"
+Info: [/dev/nvme5n1] Discarding device
+Info: This device doesn't support BLKSECDISCARD
+Info: Discarded 953869 MB
+Info: Overprovision ratio = 0.210%
+Info: Overprovision segments = 1957 (GC reserved = 960)
+Info: format successful
+{'run': True, 'print_only': False}
+umount /dev/nvme5n1
+None
+None
+nvme format -s 1 /dev/nvme5n1
+None
+None
+mkfs.f2fs /dev/nvme5n1
+None
+None
+mount /dev/nvme5n1 /mnt/nvme_test/
+None
+None
+head -c 50G </dev/urandom >/mnt/nvme_test/fio_file
+None
+None
+exec bpftrace -e 'BEGIN {printf("start: %llu\n", nsecs)} tracepoint:kyber:kyber_adjust {printf("domain: %s, depth: %d, timestamp: %llu\n", args->domain, args->depth, nsecs)}' > results_kyber_vary_target_lat/rep_0/bpf_log/bpf_r256-w256_sche_none_r_0_w_0.txt
+sleep 10s
+None
+None
+/mnt/sdc/zebin/local/fio-3.35/fio --time_based=1 --ramp_time=360s --runtime=360s --ioengine=io_uring --registerfiles=1 --fixedbufs=1 --size=100% --norandommap=1 --group_reporting=1 --direct=1 --output-format=json --bs=4k --filename=/mnt/nvme_test/fio_file --write_iops_log=results_kyber_vary_target_lat/rep_0/iops_log/r256-w256_sche_none_r_0_w_0_iops --write_lat_log=results_kyber_vary_target_lat/rep_0/lat_log/r256-w256_sche_none_r_0_w_0_lat --log_avg_msec=1000 --name=1 --rw=randread --cpus_allowed=1 --iodepth=1 --name=2 --rw=randwrite --cpus_allowed=2 --iodepth=256 -o results_kyber_vary_target_lat/rep_0/fio_output/r256-w256_sche_none_r_0_w_0.txt
+None
+None
+sleep 5s
+None
+None
+umount /dev/nvme5n1
+None
+None
+nvme format -s 1 /dev/nvme5n1
+None
+None
+mkfs.f2fs /dev/nvme5n1
+None
+None
+mount /dev/nvme5n1 /mnt/nvme_test/
+None
+None
+head -c 50G </dev/urandom >/mnt/nvme_test/fio_file
+None
+None
+exec bpftrace -e 'BEGIN {printf("start: %llu\n", nsecs)} tracepoint:kyber:kyber_adjust {printf("domain: %s, depth: %d, timestamp: %llu\n", args->domain, args->depth, nsecs)}' > results_kyber_vary_target_lat/rep_1/bpf_log/bpf_r256-w256_sche_none_r_0_w_0.txt
+sleep 10s
+None
+None
+/mnt/sdc/zebin/local/fio-3.35/fio --time_based=1 --ramp_time=360s --runtime=360s --ioengine=io_uring --registerfiles=1 --fixedbufs=1 --size=100% --norandommap=1 --group_reporting=1 --direct=1 --output-format=json --bs=4k --filename=/mnt/nvme_test/fio_file --write_iops_log=results_kyber_vary_target_lat/rep_1/iops_log/r256-w256_sche_none_r_0_w_0_iops --write_lat_log=results_kyber_vary_target_lat/rep_1/lat_log/r256-w256_sche_none_r_0_w_0_lat --log_avg_msec=1000 --name=1 --rw=randread --cpus_allowed=1 --iodepth=1 --name=2 --rw=randwrite --cpus_allowed=2 --iodepth=256 -o results_kyber_vary_target_lat/rep_1/fio_output/r256-w256_sche_none_r_0_w_0.txt
+None
+None
+sleep 5s
+None
+None
+umount /dev/nvme5n1
+None
+None
+nvme format -s 1 /dev/nvme5n1
+None
+None
+mkfs.f2fs /dev/nvme5n1
+None
+None
+mount /dev/nvme5n1 /mnt/nvme_test/
+None
+None
+head -c 50G </dev/urandom >/mnt/nvme_test/fio_file
+None
+None
+exec bpftrace -e 'BEGIN {printf("start: %llu\n", nsecs)} tracepoint:kyber:kyber_adjust {printf("domain: %s, depth: %d, timestamp: %llu\n", args->domain, args->depth, nsecs)}' > results_kyber_vary_target_lat/rep_2/bpf_log/bpf_r256-w256_sche_none_r_0_w_0.txt
+sleep 10s
+None
+None
+/mnt/sdc/zebin/local/fio-3.35/fio --time_based=1 --ramp_time=360s --runtime=360s --ioengine=io_uring --registerfiles=1 --fixedbufs=1 --size=100% --norandommap=1 --group_reporting=1 --direct=1 --output-format=json --bs=4k --filename=/mnt/nvme_test/fio_file --write_iops_log=results_kyber_vary_target_lat/rep_2/iops_log/r256-w256_sche_none_r_0_w_0_iops --write_lat_log=results_kyber_vary_target_lat/rep_2/lat_log/r256-w256_sche_none_r_0_w_0_lat --log_avg_msec=1000 --name=1 --rw=randread --cpus_allowed=1 --iodepth=1 --name=2 --rw=randwrite --cpus_allowed=2 --iodepth=256 -o results_kyber_vary_target_lat/rep_2/fio_output/r256-w256_sche_none_r_0_w_0.txt
+None
+None
+sleep 5s
+None
+None
+umount /dev/nvme5n1
+None
+None
+nvme format -s 1 /dev/nvme5n1
+None
+None
+mkfs.f2fs /dev/nvme5n1
+None
+None
+mount /dev/nvme5n1 /mnt/nvme_test/
+None
+None
+head -c 50G </dev/urandom >/mnt/nvme_test/fio_file
+None
+None
+exec bpftrace -e 'BEGIN {printf("start: %llu\n", nsecs)} tracepoint:kyber:kyber_adjust {printf("domain: %s, depth: %d, timestamp: %llu\n", args->domain, args->depth, nsecs)}' > results_kyber_vary_target_lat/rep_3/bpf_log/bpf_r256-w256_sche_none_r_0_w_0.txt
+sleep 10s
+None
+None
+/mnt/sdc/zebin/local/fio-3.35/fio --time_based=1 --ramp_time=360s --runtime=360s --ioengine=io_uring --registerfiles=1 --fixedbufs=1 --size=100% --norandommap=1 --group_reporting=1 --direct=1 --output-format=json --bs=4k --filename=/mnt/nvme_test/fio_file --write_iops_log=results_kyber_vary_target_lat/rep_3/iops_log/r256-w256_sche_none_r_0_w_0_iops --write_lat_log=results_kyber_vary_target_lat/rep_3/lat_log/r256-w256_sche_none_r_0_w_0_lat --log_avg_msec=1000 --name=1 --rw=randread --cpus_allowed=1 --iodepth=1 --name=2 --rw=randwrite --cpus_allowed=2 --iodepth=256 -o results_kyber_vary_target_lat/rep_3/fio_output/r256-w256_sche_none_r_0_w_0.txt
+None
+None
+sleep 5s
+None
+None
+umount /dev/nvme5n1
+None
+None
+nvme format -s 1 /dev/nvme5n1
+None
+None
+mkfs.f2fs /dev/nvme5n1
+None
+None
+mount /dev/nvme5n1 /mnt/nvme_test/
+None
+None
+head -c 50G </dev/urandom >/mnt/nvme_test/fio_file
+None
+None
+exec bpftrace -e 'BEGIN {printf("start: %llu\n", nsecs)} tracepoint:kyber:kyber_adjust {printf("domain: %s, depth: %d, timestamp: %llu\n", args->domain, args->depth, nsecs)}' > results_kyber_vary_target_lat/rep_4/bpf_log/bpf_r256-w256_sche_none_r_0_w_0.txt
+sleep 10s
+None
+None
+/mnt/sdc/zebin/local/fio-3.35/fio --time_based=1 --ramp_time=360s --runtime=360s --ioengine=io_uring --registerfiles=1 --fixedbufs=1 --size=100% --norandommap=1 --group_reporting=1 --direct=1 --output-format=json --bs=4k --filename=/mnt/nvme_test/fio_file --write_iops_log=results_kyber_vary_target_lat/rep_4/iops_log/r256-w256_sche_none_r_0_w_0_iops --write_lat_log=results_kyber_vary_target_lat/rep_4/lat_log/r256-w256_sche_none_r_0_w_0_lat --log_avg_msec=1000 --name=1 --rw=randread --cpus_allowed=1 --iodepth=1 --name=2 --rw=randwrite --cpus_allowed=2 --iodepth=256 -o results_kyber_vary_target_lat/rep_4/fio_output/r256-w256_sche_none_r_0_w_0.txt
+None
+None
+sleep 5s
+None
+None
+###########Result without std###########
+READ IOPS
+& 0
+0 & 15.4 & \\
+
+WRITE IOPS
+& 0
+0 & 135.8 & \\
+
+READ latency in ms
+& 0
+0 & 0.2 & \\
+
+Write latency in ms
+& 0
+0 & 2.0 & \\
+
+###########Result with std###########
+READ IOPS
+& 0
+0 & 15.4 (0.0) & \\
+
+WRITE IOPS
+& 0
+0 & 135.8 (1.2) & \\
+
+READ latency in ms
+& 0
+0 & 0.2 (0.0) & \\
+
+Write latency in ms
+& 0
+0 & 2.0 (0.0) & \\
+
+Traceback (most recent call last):
+  File "kyber_vary_target_lat.py", line 630, in <module>
+    ax.set_xticks(np.arange(len(write_target_latencies_ticks)),
+  File "/usr/local/lib/python3.8/dist-packages/matplotlib/axes/_base.py", line 74, in wrapper
+    return get_method(self)(*args, **kwargs)
+  File "/usr/local/lib/python3.8/dist-packages/matplotlib/axis.py", line 2076, in set_ticks
+    self.set_ticklabels(labels, minor=minor, **kwargs)
+  File "/usr/local/lib/python3.8/dist-packages/matplotlib/_api/deprecation.py", line 297, in wrapper
+    return func(*args, **kwargs)
+  File "/usr/local/lib/python3.8/dist-packages/matplotlib/axis.py", line 1969, in set_ticklabels
+    raise ValueError(
+ValueError: The number of FixedLocator locations (1), usually from a call to set_ticks, does not match the number of labels (2).

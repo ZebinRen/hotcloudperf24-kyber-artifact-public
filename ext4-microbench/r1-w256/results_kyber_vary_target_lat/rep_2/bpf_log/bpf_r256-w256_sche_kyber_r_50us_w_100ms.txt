@@ -1,0 +1,6 @@
+Attaching 2 probes...
+start: 296266958824315
+domain: WRITE, depth: 64, timestamp: 296285564012972
+domain: WRITE, depth: 16, timestamp: 296285668012523
+domain: WRITE, depth: 4, timestamp: 296285772009796
+domain: WRITE, depth: 1, timestamp: 296285876009155

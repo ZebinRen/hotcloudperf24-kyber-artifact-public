@@ -1,0 +1,1064 @@
+nohup: ignoring input
+Success formatting namespace:1
+mke2fs 1.45.5 (07-Jan-2020)
+Discarding device blocks:      4096/244190646 14159872/244190646                   done                            
+Creating filesystem with 244190646 4k blocks and 61054976 inodes
+Filesystem UUID: d2c3fe57-ceb9-45de-bec5-aada8a689da8
+Superblock backups stored on blocks: 
+	32768, 98304, 163840, 229376, 294912, 819200, 884736, 1605632, 2654208, 
+	4096000, 7962624, 11239424, 20480000, 23887872, 71663616, 78675968, 
+	102400000, 214990848
+
+Allocating group tables:    0/7453         done                            
+Writing inode tables:    0/7453         done                            
+Creating journal (262144 blocks): done
+Writing superblocks and filesystem accounting information:    0/7453         done
+
+Success formatting namespace:1
+mke2fs 1.45.5 (07-Jan-2020)
+Discarding device blocks:      4096/244190646 47714304/244190646                   done                            
+Creating filesystem with 244190646 4k blocks and 61054976 inodes
+Filesystem UUID: 6b0dd4a1-f018-47bf-8e3d-9df60876e0af
+Superblock backups stored on blocks: 
+	32768, 98304, 163840, 229376, 294912, 819200, 884736, 1605632, 2654208, 
+	4096000, 7962624, 11239424, 20480000, 23887872, 71663616, 78675968, 
+	102400000, 214990848
+
+Allocating group tables:    0/7453         done                            
+Writing inode tables:    0/7453         done                            
+Creating journal (262144 blocks): done
+Writing superblocks and filesystem accounting information:    0/7453         done
+
+Success formatting namespace:1
+mke2fs 1.45.5 (07-Jan-2020)
+Discarding device blocks:      4096/244190646 78123008/244190646                   done                            
+Creating filesystem with 244190646 4k blocks and 61054976 inodes
+Filesystem UUID: 22b54a5b-b0cf-43d6-a8dd-3ea210b94e28
+Superblock backups stored on blocks: 
+	32768, 98304, 163840, 229376, 294912, 819200, 884736, 1605632, 2654208, 
+	4096000, 7962624, 11239424, 20480000, 23887872, 71663616, 78675968, 
+	102400000, 214990848
+
+Allocating group tables:    0/7453         done                            
+Writing inode tables:    0/7453         done                            
+Creating journal (262144 blocks): done
+Writing superblocks and filesystem accounting information:    0/7453         done
+
+Success formatting namespace:1
+mke2fs 1.45.5 (07-Jan-2020)
+Discarding device blocks:      4096/244190646130027520/244190646                   done                            
+Creating filesystem with 244190646 4k blocks and 61054976 inodes
+Filesystem UUID: c7c1e821-e797-4b72-967a-2d695ca3163e
+Superblock backups stored on blocks: 
+	32768, 98304, 163840, 229376, 294912, 819200, 884736, 1605632, 2654208, 
+	4096000, 7962624, 11239424, 20480000, 23887872, 71663616, 78675968, 
+	102400000, 214990848
+
+Allocating group tables:    0/7453         done                            
+Writing inode tables:    0/7453         done                            
+Creating journal (262144 blocks): done
+Writing superblocks and filesystem accounting information:    0/7453         done
+
+Success formatting namespace:1
+mke2fs 1.45.5 (07-Jan-2020)
+Discarding device blocks:      4096/244190646 70258688/244190646                   done                            
+Creating filesystem with 244190646 4k blocks and 61054976 inodes
+Filesystem UUID: d8e7fe24-dd78-4983-89bf-a5de02e5ee6e
+Superblock backups stored on blocks: 
+	32768, 98304, 163840, 229376, 294912, 819200, 884736, 1605632, 2654208, 
+	4096000, 7962624, 11239424, 20480000, 23887872, 71663616, 78675968, 
+	102400000, 214990848
+
+Allocating group tables:    0/7453         done                            
+Writing inode tables:    0/7453         done                            
+Creating journal (262144 blocks): done
+Writing superblocks and filesystem accounting information:    0/7453         done
+
+Success formatting namespace:1
+mke2fs 1.45.5 (07-Jan-2020)
+Discarding device blocks:      4096/244190646156766208/244190646                   done                            
+Creating filesystem with 244190646 4k blocks and 61054976 inodes
+Filesystem UUID: 6daf8b02-0f29-4121-bfba-09e55b3d45d7
+Superblock backups stored on blocks: 
+	32768, 98304, 163840, 229376, 294912, 819200, 884736, 1605632, 2654208, 
+	4096000, 7962624, 11239424, 20480000, 23887872, 71663616, 78675968, 
+	102400000, 214990848
+
+Allocating group tables:    0/7453         done                            
+Writing inode tables:    0/7453         done                            
+Creating journal (262144 blocks): done
+Writing superblocks and filesystem accounting information:    0/7453         done
+
+{'run': True, 'print_only': False}
+umount /dev/nvme5n1
+None
+None
+nvme format -s 1 /dev/nvme5n1
+None
+None
+mkfs.ext4 /dev/nvme5n1
+None
+None
+mount /dev/nvme5n1 /mnt/nvme_test/
+None
+None
+head -c 50G </dev/urandom >/mnt/nvme_test/fio_file
+None
+None
+sleep 10s
+None
+None
+modprobe -r kyber_iosched
+None
+None
+modprobe kyber_iosched
+None
+None
+Set parameter read_lat_nsec to 50000
+Set parameter write_lat_nsec to 20000
+exec bpftrace -e 'BEGIN {printf("start: %llu\n", nsecs)} tracepoint:kyber:kyber_adjust {printf("domain: %s, depth: %d, timestamp: %llu\n", args->domain, args->depth, nsecs)}' > results_kyber_vary_target_lat/rep_0/bpf_log/bpf_r256-w256_sche_kyber_r_50us_w_20us.txt
+sleep 10s
+None
+None
+/mnt/sdc/zebin/local/fio-3.35/fio --time_based=1 --ramp_time=360s --runtime=360s --ioengine=io_uring --registerfiles=1 --fixedbufs=1 --size=100% --norandommap=1 --group_reporting=1 --direct=1 --output-format=json --bs=4k --filename=/mnt/nvme_test/fio_file --write_iops_log=results_kyber_vary_target_lat/rep_0/iops_log/r256-w256_sche_kyber_r_50us_w_20us_iops --write_lat_log=results_kyber_vary_target_lat/rep_0/lat_log/r256-w256_sche_kyber_r_50us_w_20us_lat --log_avg_msec=1000 --name=1 --rw=randread --cpus_allowed=1 --iodepth=1 --name=2 --rw=randwrite --cpus_allowed=2 --iodepth=256 -o results_kyber_vary_target_lat/rep_0/fio_output/r256-w256_sche_kyber_r_50us_w_20us.txt
+None
+None
+sleep 5s
+None
+None
+umount /dev/nvme5n1
+None
+None
+nvme format -s 1 /dev/nvme5n1
+None
+None
+mkfs.ext4 /dev/nvme5n1
+None
+None
+mount /dev/nvme5n1 /mnt/nvme_test/
+None
+None
+head -c 50G </dev/urandom >/mnt/nvme_test/fio_file
+None
+None
+sleep 10s
+None
+None
+modprobe -r kyber_iosched
+None
+None
+modprobe kyber_iosched
+None
+None
+Set parameter read_lat_nsec to 100000000
+Set parameter write_lat_nsec to 20000
+exec bpftrace -e 'BEGIN {printf("start: %llu\n", nsecs)} tracepoint:kyber:kyber_adjust {printf("domain: %s, depth: %d, timestamp: %llu\n", args->domain, args->depth, nsecs)}' > results_kyber_vary_target_lat/rep_0/bpf_log/bpf_r256-w256_sche_kyber_r_100ms_w_20us.txt
+sleep 10s
+None
+None
+/mnt/sdc/zebin/local/fio-3.35/fio --time_based=1 --ramp_time=360s --runtime=360s --ioengine=io_uring --registerfiles=1 --fixedbufs=1 --size=100% --norandommap=1 --group_reporting=1 --direct=1 --output-format=json --bs=4k --filename=/mnt/nvme_test/fio_file --write_iops_log=results_kyber_vary_target_lat/rep_0/iops_log/r256-w256_sche_kyber_r_100ms_w_20us_iops --write_lat_log=results_kyber_vary_target_lat/rep_0/lat_log/r256-w256_sche_kyber_r_100ms_w_20us_lat --log_avg_msec=1000 --name=1 --rw=randread --cpus_allowed=1 --iodepth=1 --name=2 --rw=randwrite --cpus_allowed=2 --iodepth=256 -o results_kyber_vary_target_lat/rep_0/fio_output/r256-w256_sche_kyber_r_100ms_w_20us.txt
+None
+None
+sleep 5s
+None
+None
+umount /dev/nvme5n1
+None
+None
+nvme format -s 1 /dev/nvme5n1
+None
+None
+mkfs.ext4 /dev/nvme5n1
+None
+None
+mount /dev/nvme5n1 /mnt/nvme_test/
+None
+None
+head -c 50G </dev/urandom >/mnt/nvme_test/fio_file
+None
+None
+sleep 10s
+None
+None
+modprobe -r kyber_iosched
+None
+None
+modprobe kyber_iosched
+None
+None
+Set parameter read_lat_nsec to 50000
+Set parameter write_lat_nsec to 100000000
+exec bpftrace -e 'BEGIN {printf("start: %llu\n", nsecs)} tracepoint:kyber:kyber_adjust {printf("domain: %s, depth: %d, timestamp: %llu\n", args->domain, args->depth, nsecs)}' > results_kyber_vary_target_lat/rep_0/bpf_log/bpf_r256-w256_sche_kyber_r_50us_w_100ms.txt
+sleep 10s
+None
+None
+/mnt/sdc/zebin/local/fio-3.35/fio --time_based=1 --ramp_time=360s --runtime=360s --ioengine=io_uring --registerfiles=1 --fixedbufs=1 --size=100% --norandommap=1 --group_reporting=1 --direct=1 --output-format=json --bs=4k --filename=/mnt/nvme_test/fio_file --write_iops_log=results_kyber_vary_target_lat/rep_0/iops_log/r256-w256_sche_kyber_r_50us_w_100ms_iops --write_lat_log=results_kyber_vary_target_lat/rep_0/lat_log/r256-w256_sche_kyber_r_50us_w_100ms_lat --log_avg_msec=1000 --name=1 --rw=randread --cpus_allowed=1 --iodepth=1 --name=2 --rw=randwrite --cpus_allowed=2 --iodepth=256 -o results_kyber_vary_target_lat/rep_0/fio_output/r256-w256_sche_kyber_r_50us_w_100ms.txt
+None
+None
+sleep 5s
+None
+None
+umount /dev/nvme5n1
+None
+None
+nvme format -s 1 /dev/nvme5n1
+None
+None
+mkfs.ext4 /dev/nvme5n1
+None
+None
+mount /dev/nvme5n1 /mnt/nvme_test/
+None
+None
+head -c 50G </dev/urandom >/mnt/nvme_test/fio_file
+None
+None
+sleep 10s
+None
+None
+modprobe -r kyber_iosched
+None
+None
+modprobe kyber_iosched
+None
+None
+Set parameter read_lat_nsec to 100000000
+Set parameter write_lat_nsec to 100000000
+exec bpftrace -e 'BEGIN {printf("start: %llu\n", nsecs)} tracepoint:kyber:kyber_adjust {printf("domain: %s, depth: %d, timestamp: %llu\n", args->domain, args->depth, nsecs)}' > results_kyber_vary_target_lat/rep_0/bpf_log/bpf_r256-w256_sche_kyber_r_100ms_w_100ms.txt
+sleep 10s
+None
+None
+/mnt/sdc/zebin/local/fio-3.35/fio --time_based=1 --ramp_time=360s --runtime=360s --ioengine=io_uring --registerfiles=1 --fixedbufs=1 --size=100% --norandommap=1 --group_reporting=1 --direct=1 --output-format=json --bs=4k --filename=/mnt/nvme_test/fio_file --write_iops_log=results_kyber_vary_target_lat/rep_0/iops_log/r256-w256_sche_kyber_r_100ms_w_100ms_iops --write_lat_log=results_kyber_vary_target_lat/rep_0/lat_log/r256-w256_sche_kyber_r_100ms_w_100ms_lat --log_avg_msec=1000 --name=1 --rw=randread --cpus_allowed=1 --iodepth=1 --name=2 --rw=randwrite --cpus_allowed=2 --iodepth=256 -o results_kyber_vary_target_lat/rep_0/fio_output/r256-w256_sche_kyber_r_100ms_w_100ms.txt
+None
+None
+sleep 5s
+None
+None
+umount /dev/nvme5n1
+None
+None
+nvme format -s 1 /dev/nvme5n1
+None
+None
+mkfs.ext4 /dev/nvme5n1
+None
+None
+mount /dev/nvme5n1 /mnt/nvme_test/
+None
+None
+head -c 50G </dev/urandom >/mnt/nvme_test/fio_file
+None
+None
+sleep 10s
+None
+None
+modprobe -r kyber_iosched
+None
+None
+modprobe kyber_iosched
+None
+None
+Set parameter read_lat_nsec to 100000000
+Set parameter write_lat_nsec to 100000000
+exec bpftrace -e 'BEGIN {printf("start: %llu\n", nsecs)} tracepoint:kyber:kyber_adjust {printf("domain: %s, depth: %d, timestamp: %llu\n", args->domain, args->depth, nsecs)}' > results_kyber_vary_target_lat/rep_1/bpf_log/bpf_r256-w256_sche_kyber_r_100ms_w_100ms.txt
+sleep 10s
+None
+None
+/mnt/sdc/zebin/local/fio-3.35/fio --time_based=1 --ramp_time=360s --runtime=360s --ioengine=io_uring --registerfiles=1 --fixedbufs=1 --size=100% --norandommap=1 --group_reporting=1 --direct=1 --output-format=json --bs=4k --filename=/mnt/nvme_test/fio_file --write_iops_log=results_kyber_vary_target_lat/rep_1/iops_log/r256-w256_sche_kyber_r_100ms_w_100ms_iops --write_lat_log=results_kyber_vary_target_lat/rep_1/lat_log/r256-w256_sche_kyber_r_100ms_w_100ms_lat --log_avg_msec=1000 --name=1 --rw=randread --cpus_allowed=1 --iodepth=1 --name=2 --rw=randwrite --cpus_allowed=2 --iodepth=256 -o results_kyber_vary_target_lat/rep_1/fio_output/r256-w256_sche_kyber_r_100ms_w_100ms.txt
+None
+None
+sleep 5s
+None
+None
+umount /dev/nvme5n1
+None
+None
+nvme format -s 1 /dev/nvme5n1
+None
+None
+mkfs.ext4 /dev/nvme5n1
+None
+None
+mount /dev/nvme5n1 /mnt/nvme_test/
+None
+None
+head -c 50G </dev/urandom >/mnt/nvme_test/fio_file
+None
+None
+sleep 10s
+None
+None
+modprobe -r kyber_iosched
+None
+None
+modprobe kyber_iosched
+None
+None
+Set parameter read_lat_nsec to 50000
+Set parameter write_lat_nsec to 100000000
+exec bpftrace -e 'BEGIN {printf("start: %llu\n", nsecs)} tracepoint:kyber:kyber_adjust {printf("domain: %s, depth: %d, timestamp: %llu\n", args->domain, args->depth, nsecs)}' > results_kyber_vary_target_lat/rep_1/bpf_log/bpf_r256-w256_sche_kyber_r_50us_w_100ms.txt
+sleep 10s
+None
+None
+Success formatting namespace:1
+mke2fs 1.45.5 (07-Jan-2020)
+Discarding device blocks:      4096/244190646  1576960/244190646                   done                            
+Creating filesystem with 244190646 4k blocks and 61054976 inodes
+Filesystem UUID: 41bbae75-2583-4d58-a0c0-f3400bf31e3f
+Superblock backups stored on blocks: 
+	32768, 98304, 163840, 229376, 294912, 819200, 884736, 1605632, 2654208, 
+	4096000, 7962624, 11239424, 20480000, 23887872, 71663616, 78675968, 
+	102400000, 214990848
+
+Allocating group tables:    0/7453         done                            
+Writing inode tables:    0/7453         done                            
+Creating journal (262144 blocks): done
+Writing superblocks and filesystem accounting information:    0/7453         done
+
+Success formatting namespace:1
+mke2fs 1.45.5 (07-Jan-2020)
+Discarding device blocks:      4096/244190646                   done                            
+Creating filesystem with 244190646 4k blocks and 61054976 inodes
+Filesystem UUID: ffc6ff9d-cb58-4a06-9420-d5dcff639710
+Superblock backups stored on blocks: 
+	32768, 98304, 163840, 229376, 294912, 819200, 884736, 1605632, 2654208, 
+	4096000, 7962624, 11239424, 20480000, 23887872, 71663616, 78675968, 
+	102400000, 214990848
+
+Allocating group tables:    0/7453         done                            
+Writing inode tables:    0/7453         done                            
+Creating journal (262144 blocks): done
+Writing superblocks and filesystem accounting information:    0/7453         done
+
+Success formatting namespace:1
+mke2fs 1.45.5 (07-Jan-2020)
+Discarding device blocks:      4096/244190646                   done                            
+Creating filesystem with 244190646 4k blocks and 61054976 inodes
+Filesystem UUID: c4e97f4f-ff94-445a-bd88-03df83a85b30
+Superblock backups stored on blocks: 
+	32768, 98304, 163840, 229376, 294912, 819200, 884736, 1605632, 2654208, 
+	4096000, 7962624, 11239424, 20480000, 23887872, 71663616, 78675968, 
+	102400000, 214990848
+
+Allocating group tables:    0/7453         done                            
+Writing inode tables:    0/7453         done                            
+Creating journal (262144 blocks): done
+Writing superblocks and filesystem accounting information:    0/7453         done
+
+Success formatting namespace:1
+mke2fs 1.45.5 (07-Jan-2020)
+Discarding device blocks:      4096/244190646 81793024/244190646                   done                            
+Creating filesystem with 244190646 4k blocks and 61054976 inodes
+Filesystem UUID: 8111b97c-7b27-40fe-8c18-ffc8e862cfe0
+Superblock backups stored on blocks: 
+	32768, 98304, 163840, 229376, 294912, 819200, 884736, 1605632, 2654208, 
+	4096000, 7962624, 11239424, 20480000, 23887872, 71663616, 78675968, 
+	102400000, 214990848
+
+Allocating group tables:    0/7453         done                            
+Writing inode tables:    0/7453         done                            
+Creating journal (262144 blocks): done
+Writing superblocks and filesystem accounting information:    0/7453         done
+
+Success formatting namespace:1
+mke2fs 1.45.5 (07-Jan-2020)
+Discarding device blocks:      4096/244190646 57675776/244190646                   done                            
+Creating filesystem with 244190646 4k blocks and 61054976 inodes
+Filesystem UUID: 5be7b056-76a5-4ea5-a6f6-8b45b2a272f1
+Superblock backups stored on blocks: 
+	32768, 98304, 163840, 229376, 294912, 819200, 884736, 1605632, 2654208, 
+	4096000, 7962624, 11239424, 20480000, 23887872, 71663616, 78675968, 
+	102400000, 214990848
+
+Allocating group tables:    0/7453         done                            
+Writing inode tables:    0/7453         done                            
+Creating journal (262144 blocks): done
+Writing superblocks and filesystem accounting information:    0/7453         done
+
+Success formatting namespace:1
+mke2fs 1.45.5 (07-Jan-2020)
+Discarding device blocks:      4096/244190646                   done                            
+Creating filesystem with 244190646 4k blocks and 61054976 inodes
+Filesystem UUID: 54be8646-464d-4303-92b6-6c490d0b6619
+Superblock backups stored on blocks: 
+	32768, 98304, 163840, 229376, 294912, 819200, 884736, 1605632, 2654208, 
+	4096000, 7962624, 11239424, 20480000, 23887872, 71663616, 78675968, 
+	102400000, 214990848
+
+Allocating group tables:    0/7453         done                            
+Writing inode tables:    0/7453         done                            
+Creating journal (262144 blocks): done
+Writing superblocks and filesystem accounting information:    0/7453         done
+
+/mnt/sdc/zebin/local/fio-3.35/fio --time_based=1 --ramp_time=360s --runtime=360s --ioengine=io_uring --registerfiles=1 --fixedbufs=1 --size=100% --norandommap=1 --group_reporting=1 --direct=1 --output-format=json --bs=4k --filename=/mnt/nvme_test/fio_file --write_iops_log=results_kyber_vary_target_lat/rep_1/iops_log/r256-w256_sche_kyber_r_50us_w_100ms_iops --write_lat_log=results_kyber_vary_target_lat/rep_1/lat_log/r256-w256_sche_kyber_r_50us_w_100ms_lat --log_avg_msec=1000 --name=1 --rw=randread --cpus_allowed=1 --iodepth=1 --name=2 --rw=randwrite --cpus_allowed=2 --iodepth=256 -o results_kyber_vary_target_lat/rep_1/fio_output/r256-w256_sche_kyber_r_50us_w_100ms.txt
+None
+None
+sleep 5s
+None
+None
+umount /dev/nvme5n1
+None
+None
+nvme format -s 1 /dev/nvme5n1
+None
+None
+mkfs.ext4 /dev/nvme5n1
+None
+None
+mount /dev/nvme5n1 /mnt/nvme_test/
+None
+None
+head -c 50G </dev/urandom >/mnt/nvme_test/fio_file
+None
+None
+sleep 10s
+None
+None
+modprobe -r kyber_iosched
+None
+None
+modprobe kyber_iosched
+None
+None
+Set parameter read_lat_nsec to 100000000
+Set parameter write_lat_nsec to 20000
+exec bpftrace -e 'BEGIN {printf("start: %llu\n", nsecs)} tracepoint:kyber:kyber_adjust {printf("domain: %s, depth: %d, timestamp: %llu\n", args->domain, args->depth, nsecs)}' > results_kyber_vary_target_lat/rep_1/bpf_log/bpf_r256-w256_sche_kyber_r_100ms_w_20us.txt
+sleep 10s
+None
+None
+/mnt/sdc/zebin/local/fio-3.35/fio --time_based=1 --ramp_time=360s --runtime=360s --ioengine=io_uring --registerfiles=1 --fixedbufs=1 --size=100% --norandommap=1 --group_reporting=1 --direct=1 --output-format=json --bs=4k --filename=/mnt/nvme_test/fio_file --write_iops_log=results_kyber_vary_target_lat/rep_1/iops_log/r256-w256_sche_kyber_r_100ms_w_20us_iops --write_lat_log=results_kyber_vary_target_lat/rep_1/lat_log/r256-w256_sche_kyber_r_100ms_w_20us_lat --log_avg_msec=1000 --name=1 --rw=randread --cpus_allowed=1 --iodepth=1 --name=2 --rw=randwrite --cpus_allowed=2 --iodepth=256 -o results_kyber_vary_target_lat/rep_1/fio_output/r256-w256_sche_kyber_r_100ms_w_20us.txt
+None
+None
+sleep 5s
+None
+None
+umount /dev/nvme5n1
+None
+None
+nvme format -s 1 /dev/nvme5n1
+None
+None
+mkfs.ext4 /dev/nvme5n1
+None
+None
+mount /dev/nvme5n1 /mnt/nvme_test/
+None
+None
+head -c 50G </dev/urandom >/mnt/nvme_test/fio_file
+None
+None
+sleep 10s
+None
+None
+modprobe -r kyber_iosched
+None
+None
+modprobe kyber_iosched
+None
+None
+Set parameter read_lat_nsec to 50000
+Set parameter write_lat_nsec to 20000
+exec bpftrace -e 'BEGIN {printf("start: %llu\n", nsecs)} tracepoint:kyber:kyber_adjust {printf("domain: %s, depth: %d, timestamp: %llu\n", args->domain, args->depth, nsecs)}' > results_kyber_vary_target_lat/rep_1/bpf_log/bpf_r256-w256_sche_kyber_r_50us_w_20us.txt
+sleep 10s
+None
+None
+/mnt/sdc/zebin/local/fio-3.35/fio --time_based=1 --ramp_time=360s --runtime=360s --ioengine=io_uring --registerfiles=1 --fixedbufs=1 --size=100% --norandommap=1 --group_reporting=1 --direct=1 --output-format=json --bs=4k --filename=/mnt/nvme_test/fio_file --write_iops_log=results_kyber_vary_target_lat/rep_1/iops_log/r256-w256_sche_kyber_r_50us_w_20us_iops --write_lat_log=results_kyber_vary_target_lat/rep_1/lat_log/r256-w256_sche_kyber_r_50us_w_20us_lat --log_avg_msec=1000 --name=1 --rw=randread --cpus_allowed=1 --iodepth=1 --name=2 --rw=randwrite --cpus_allowed=2 --iodepth=256 -o results_kyber_vary_target_lat/rep_1/fio_output/r256-w256_sche_kyber_r_50us_w_20us.txt
+None
+None
+sleep 5s
+None
+None
+umount /dev/nvme5n1
+None
+None
+nvme format -s 1 /dev/nvme5n1
+None
+None
+mkfs.ext4 /dev/nvme5n1
+None
+None
+mount /dev/nvme5n1 /mnt/nvme_test/
+None
+None
+head -c 50G </dev/urandom >/mnt/nvme_test/fio_file
+None
+None
+sleep 10s
+None
+None
+modprobe -r kyber_iosched
+None
+None
+modprobe kyber_iosched
+None
+None
+Set parameter read_lat_nsec to 50000
+Set parameter write_lat_nsec to 100000000
+exec bpftrace -e 'BEGIN {printf("start: %llu\n", nsecs)} tracepoint:kyber:kyber_adjust {printf("domain: %s, depth: %d, timestamp: %llu\n", args->domain, args->depth, nsecs)}' > results_kyber_vary_target_lat/rep_2/bpf_log/bpf_r256-w256_sche_kyber_r_50us_w_100ms.txt
+sleep 10s
+None
+None
+/mnt/sdc/zebin/local/fio-3.35/fio --time_based=1 --ramp_time=360s --runtime=360s --ioengine=io_uring --registerfiles=1 --fixedbufs=1 --size=100% --norandommap=1 --group_reporting=1 --direct=1 --output-format=json --bs=4k --filename=/mnt/nvme_test/fio_file --write_iops_log=results_kyber_vary_target_lat/rep_2/iops_log/r256-w256_sche_kyber_r_50us_w_100ms_iops --write_lat_log=results_kyber_vary_target_lat/rep_2/lat_log/r256-w256_sche_kyber_r_50us_w_100ms_lat --log_avg_msec=1000 --name=1 --rw=randread --cpus_allowed=1 --iodepth=1 --name=2 --rw=randwrite --cpus_allowed=2 --iodepth=256 -o results_kyber_vary_target_lat/rep_2/fio_output/r256-w256_sche_kyber_r_50us_w_100ms.txt
+None
+None
+sleep 5s
+None
+None
+umount /dev/nvme5n1
+None
+None
+nvme format -s 1 /dev/nvme5n1
+None
+None
+mkfs.ext4 /dev/nvme5n1
+None
+None
+mount /dev/nvme5n1 /mnt/nvme_test/
+None
+None
+head -c 50G </dev/urandom >/mnt/nvme_test/fio_file
+None
+None
+sleep 10s
+None
+None
+modprobe -r kyber_iosched
+None
+None
+modprobe kyber_iosched
+None
+None
+Set parameter read_lat_nsec to 50000
+Set parameter write_lat_nsec to 20000
+exec bpftrace -e 'BEGIN {printf("start: %llu\n", nsecs)} tracepoint:kyber:kyber_adjust {printf("domain: %s, depth: %d, timestamp: %llu\n", args->domain, args->depth, nsecs)}' > results_kyber_vary_target_lat/rep_2/bpf_log/bpf_r256-w256_sche_kyber_r_50us_w_20us.txt
+sleep 10s
+None
+None
+/mnt/sdc/zebin/local/fio-3.35/fio --time_based=1 --ramp_time=360s --runtime=360s --ioengine=io_uring --registerfiles=1 --fixedbufs=1 --size=100% --norandommap=1 --group_reporting=1 --direct=1 --output-format=json --bs=4k --filename=/mnt/nvme_test/fio_file --write_iops_log=results_kyber_vary_target_lat/rep_2/iops_log/r256-w256_sche_kyber_r_50us_w_20us_iops --write_lat_log=results_kyber_vary_target_lat/rep_2/lat_log/r256-w256_sche_kyber_r_50us_w_20us_lat --log_avg_msec=1000 --name=1 --rw=randread --cpus_allowed=1 --iodepth=1 --name=2 --rw=randwrite --cpus_allowed=2 --iodepth=256 -o results_kyber_vary_target_lat/rep_2/fio_output/r256-w256_sche_kyber_r_50us_w_20us.txt
+None
+None
+sleep 5s
+None
+None
+umount /dev/nvme5n1
+None
+None
+nvme format -s 1 /dev/nvme5n1
+None
+None
+mkfs.ext4 /dev/nvme5n1
+None
+None
+mount /dev/nvme5n1 /mnt/nvme_test/
+None
+None
+head -c 50G </dev/urandom >/mnt/nvme_test/fio_file
+None
+None
+sleep 10s
+None
+None
+modprobe -r kyber_iosched
+None
+None
+modprobe kyber_iosched
+None
+None
+Set parameter read_lat_nsec to 100000000
+Set parameter write_lat_nsec to 20000
+exec bpftrace -e 'BEGIN {printf("start: %llu\n", nsecs)} tracepoint:kyber:kyber_adjust {printf("domain: %s, depth: %d, timestamp: %llu\n", args->domain, args->depth, nsecs)}' > results_kyber_vary_target_lat/rep_2/bpf_log/bpf_r256-w256_sche_kyber_r_100ms_w_20us.txt
+sleep 10s
+None
+None
+/mnt/sdc/zebin/local/fio-3.35/fio --time_based=1 --ramp_time=360s --runtime=360s --ioengine=io_uring --registerfiles=1 --fixedbufs=1 --size=100% --norandommap=1 --group_reporting=1 --direct=1 --output-format=json --bs=4k --filename=/mnt/nvme_test/fio_file --write_iops_log=results_kyber_vary_target_lat/rep_2/iops_log/r256-w256_sche_kyber_r_100ms_w_20us_iops --write_lat_log=results_kyber_vary_target_lat/rep_2/lat_log/r256-w256_sche_kyber_r_100ms_w_20us_lat --log_avg_msec=1000 --name=1 --rw=randread --cpus_allowed=1 --iodepth=1 --name=2 --rw=randwrite --cpus_allowed=2 --iodepth=256 -o results_kyber_vary_target_lat/rep_2/fio_output/r256-w256_sche_kyber_r_100ms_w_20us.txt
+None
+None
+sleep 5s
+None
+None
+umount /dev/nvme5n1
+None
+None
+nvme format -s 1 /dev/nvme5n1
+None
+None
+mkfs.ext4 /dev/nvme5n1
+None
+None
+mount /dev/nvme5n1 /mnt/nvme_test/
+None
+None
+head -c 50G </dev/urandom >/mnt/nvme_test/fio_file
+None
+None
+sleep 10s
+None
+None
+modprobe -r kyber_iosched
+None
+None
+modprobe kyber_iosched
+None
+None
+Set parameter read_lat_nsec to 100000000
+Set parameter write_lat_nsec to 100000000
+exec bpftrace -e 'BEGIN {printf("start: %llu\n", nsecs)} tracepoint:kyber:kyber_adjust {printf("domain: %s, depth: %d, timestamp: %llu\n", args->domain, args->depth, nsecs)}' > results_kyber_vary_target_lat/rep_2/bpf_log/bpf_r256-w256_sche_kyber_r_100ms_w_100ms.txt
+sleep 10s
+None
+None
+Success formatting namespace:1
+mke2fs 1.45.5 (07-Jan-2020)
+Discarding device blocks:      4096/244190646                   done                            
+Creating filesystem with 244190646 4k blocks and 61054976 inodes
+Filesystem UUID: 62f23e0c-e05d-4132-88d9-9914cf7d4cd6
+Superblock backups stored on blocks: 
+	32768, 98304, 163840, 229376, 294912, 819200, 884736, 1605632, 2654208, 
+	4096000, 7962624, 11239424, 20480000, 23887872, 71663616, 78675968, 
+	102400000, 214990848
+
+Allocating group tables:    0/7453         done                            
+Writing inode tables:    0/7453         done                            
+Creating journal (262144 blocks): done
+Writing superblocks and filesystem accounting information:    0/7453         done
+
+Success formatting namespace:1
+mke2fs 1.45.5 (07-Jan-2020)
+Discarding device blocks:      4096/244190646111153152/244190646                   done                            
+Creating filesystem with 244190646 4k blocks and 61054976 inodes
+Filesystem UUID: e89663ac-ce3b-49ab-a9f1-54a43ab61baf
+Superblock backups stored on blocks: 
+	32768, 98304, 163840, 229376, 294912, 819200, 884736, 1605632, 2654208, 
+	4096000, 7962624, 11239424, 20480000, 23887872, 71663616, 78675968, 
+	102400000, 214990848
+
+Allocating group tables:    0/7453         done                            
+Writing inode tables:    0/7453         done                            
+Creating journal (262144 blocks): done
+Writing superblocks and filesystem accounting information:    0/7453         done
+
+Success formatting namespace:1
+mke2fs 1.45.5 (07-Jan-2020)
+Discarding device blocks:      4096/244190646139988992/244190646                   done                            
+Creating filesystem with 244190646 4k blocks and 61054976 inodes
+Filesystem UUID: 90f6c54d-774e-4a08-af21-2640c9d1389b
+Superblock backups stored on blocks: 
+	32768, 98304, 163840, 229376, 294912, 819200, 884736, 1605632, 2654208, 
+	4096000, 7962624, 11239424, 20480000, 23887872, 71663616, 78675968, 
+	102400000, 214990848
+
+Allocating group tables:    0/7453         done                            
+Writing inode tables:    0/7453         done                            
+Creating journal (262144 blocks): done
+Writing superblocks and filesystem accounting information:    0/7453         done
+
+Success formatting namespace:1
+mke2fs 1.45.5 (07-Jan-2020)
+Discarding device blocks:      4096/244190646153096192/244190646                   done                            
+Creating filesystem with 244190646 4k blocks and 61054976 inodes
+Filesystem UUID: 642d1e27-c19a-45cb-b349-e1fe8e73c9ba
+Superblock backups stored on blocks: 
+	32768, 98304, 163840, 229376, 294912, 819200, 884736, 1605632, 2654208, 
+	4096000, 7962624, 11239424, 20480000, 23887872, 71663616, 78675968, 
+	102400000, 214990848
+
+Allocating group tables:    0/7453         done                            
+Writing inode tables:    0/7453         done                            
+Creating journal (262144 blocks): done
+Writing superblocks and filesystem accounting information:    0/7453         done
+
+Success formatting namespace:1
+mke2fs 1.45.5 (07-Jan-2020)
+Discarding device blocks:      4096/244190646203427840/244190646                   done                            
+Creating filesystem with 244190646 4k blocks and 61054976 inodes
+Filesystem UUID: 95f2779c-1139-497d-bd9b-24b54775584c
+Superblock backups stored on blocks: 
+	32768, 98304, 163840, 229376, 294912, 819200, 884736, 1605632, 2654208, 
+	4096000, 7962624, 11239424, 20480000, 23887872, 71663616, 78675968, 
+	102400000, 214990848
+
+Allocating group tables:    0/7453         done                            
+Writing inode tables:    0/7453         done                            
+Creating journal (262144 blocks): done
+Writing superblocks and filesystem accounting information:    0/7453         done
+
+Success formatting namespace:1
+mke2fs 1.45.5 (07-Jan-2020)
+Discarding device blocks:      4096/244190646131076096/244190646                   done                            
+Creating filesystem with 244190646 4k blocks and 61054976 inodes
+Filesystem UUID: d5ce7090-a2fd-414d-967d-2325d17d85cb
+Superblock backups stored on blocks: 
+	32768, 98304, 163840, 229376, 294912, 819200, 884736, 1605632, 2654208, 
+	4096000, 7962624, 11239424, 20480000, 23887872, 71663616, 78675968, 
+	102400000, 214990848
+
+Allocating group tables:    0/7453         done                            
+Writing inode tables:    0/7453         done                            
+Creating journal (262144 blocks): done
+Writing superblocks and filesystem accounting information:    0/7453         done
+
+/mnt/sdc/zebin/local/fio-3.35/fio --time_based=1 --ramp_time=360s --runtime=360s --ioengine=io_uring --registerfiles=1 --fixedbufs=1 --size=100% --norandommap=1 --group_reporting=1 --direct=1 --output-format=json --bs=4k --filename=/mnt/nvme_test/fio_file --write_iops_log=results_kyber_vary_target_lat/rep_2/iops_log/r256-w256_sche_kyber_r_100ms_w_100ms_iops --write_lat_log=results_kyber_vary_target_lat/rep_2/lat_log/r256-w256_sche_kyber_r_100ms_w_100ms_lat --log_avg_msec=1000 --name=1 --rw=randread --cpus_allowed=1 --iodepth=1 --name=2 --rw=randwrite --cpus_allowed=2 --iodepth=256 -o results_kyber_vary_target_lat/rep_2/fio_output/r256-w256_sche_kyber_r_100ms_w_100ms.txt
+None
+None
+sleep 5s
+None
+None
+umount /dev/nvme5n1
+None
+None
+nvme format -s 1 /dev/nvme5n1
+None
+None
+mkfs.ext4 /dev/nvme5n1
+None
+None
+mount /dev/nvme5n1 /mnt/nvme_test/
+None
+None
+head -c 50G </dev/urandom >/mnt/nvme_test/fio_file
+None
+None
+sleep 10s
+None
+None
+modprobe -r kyber_iosched
+None
+None
+modprobe kyber_iosched
+None
+None
+Set parameter read_lat_nsec to 50000
+Set parameter write_lat_nsec to 20000
+exec bpftrace -e 'BEGIN {printf("start: %llu\n", nsecs)} tracepoint:kyber:kyber_adjust {printf("domain: %s, depth: %d, timestamp: %llu\n", args->domain, args->depth, nsecs)}' > results_kyber_vary_target_lat/rep_3/bpf_log/bpf_r256-w256_sche_kyber_r_50us_w_20us.txt
+sleep 10s
+None
+None
+/mnt/sdc/zebin/local/fio-3.35/fio --time_based=1 --ramp_time=360s --runtime=360s --ioengine=io_uring --registerfiles=1 --fixedbufs=1 --size=100% --norandommap=1 --group_reporting=1 --direct=1 --output-format=json --bs=4k --filename=/mnt/nvme_test/fio_file --write_iops_log=results_kyber_vary_target_lat/rep_3/iops_log/r256-w256_sche_kyber_r_50us_w_20us_iops --write_lat_log=results_kyber_vary_target_lat/rep_3/lat_log/r256-w256_sche_kyber_r_50us_w_20us_lat --log_avg_msec=1000 --name=1 --rw=randread --cpus_allowed=1 --iodepth=1 --name=2 --rw=randwrite --cpus_allowed=2 --iodepth=256 -o results_kyber_vary_target_lat/rep_3/fio_output/r256-w256_sche_kyber_r_50us_w_20us.txt
+None
+None
+sleep 5s
+None
+None
+umount /dev/nvme5n1
+None
+None
+nvme format -s 1 /dev/nvme5n1
+None
+None
+mkfs.ext4 /dev/nvme5n1
+None
+None
+mount /dev/nvme5n1 /mnt/nvme_test/
+None
+None
+head -c 50G </dev/urandom >/mnt/nvme_test/fio_file
+None
+None
+sleep 10s
+None
+None
+modprobe -r kyber_iosched
+None
+None
+modprobe kyber_iosched
+None
+None
+Set parameter read_lat_nsec to 100000000
+Set parameter write_lat_nsec to 100000000
+exec bpftrace -e 'BEGIN {printf("start: %llu\n", nsecs)} tracepoint:kyber:kyber_adjust {printf("domain: %s, depth: %d, timestamp: %llu\n", args->domain, args->depth, nsecs)}' > results_kyber_vary_target_lat/rep_3/bpf_log/bpf_r256-w256_sche_kyber_r_100ms_w_100ms.txt
+sleep 10s
+None
+None
+/mnt/sdc/zebin/local/fio-3.35/fio --time_based=1 --ramp_time=360s --runtime=360s --ioengine=io_uring --registerfiles=1 --fixedbufs=1 --size=100% --norandommap=1 --group_reporting=1 --direct=1 --output-format=json --bs=4k --filename=/mnt/nvme_test/fio_file --write_iops_log=results_kyber_vary_target_lat/rep_3/iops_log/r256-w256_sche_kyber_r_100ms_w_100ms_iops --write_lat_log=results_kyber_vary_target_lat/rep_3/lat_log/r256-w256_sche_kyber_r_100ms_w_100ms_lat --log_avg_msec=1000 --name=1 --rw=randread --cpus_allowed=1 --iodepth=1 --name=2 --rw=randwrite --cpus_allowed=2 --iodepth=256 -o results_kyber_vary_target_lat/rep_3/fio_output/r256-w256_sche_kyber_r_100ms_w_100ms.txt
+None
+None
+sleep 5s
+None
+None
+umount /dev/nvme5n1
+None
+None
+nvme format -s 1 /dev/nvme5n1
+None
+None
+mkfs.ext4 /dev/nvme5n1
+None
+None
+mount /dev/nvme5n1 /mnt/nvme_test/
+None
+None
+head -c 50G </dev/urandom >/mnt/nvme_test/fio_file
+None
+None
+sleep 10s
+None
+None
+modprobe -r kyber_iosched
+None
+None
+modprobe kyber_iosched
+None
+None
+Set parameter read_lat_nsec to 50000
+Set parameter write_lat_nsec to 100000000
+exec bpftrace -e 'BEGIN {printf("start: %llu\n", nsecs)} tracepoint:kyber:kyber_adjust {printf("domain: %s, depth: %d, timestamp: %llu\n", args->domain, args->depth, nsecs)}' > results_kyber_vary_target_lat/rep_3/bpf_log/bpf_r256-w256_sche_kyber_r_50us_w_100ms.txt
+sleep 10s
+None
+None
+/mnt/sdc/zebin/local/fio-3.35/fio --time_based=1 --ramp_time=360s --runtime=360s --ioengine=io_uring --registerfiles=1 --fixedbufs=1 --size=100% --norandommap=1 --group_reporting=1 --direct=1 --output-format=json --bs=4k --filename=/mnt/nvme_test/fio_file --write_iops_log=results_kyber_vary_target_lat/rep_3/iops_log/r256-w256_sche_kyber_r_50us_w_100ms_iops --write_lat_log=results_kyber_vary_target_lat/rep_3/lat_log/r256-w256_sche_kyber_r_50us_w_100ms_lat --log_avg_msec=1000 --name=1 --rw=randread --cpus_allowed=1 --iodepth=1 --name=2 --rw=randwrite --cpus_allowed=2 --iodepth=256 -o results_kyber_vary_target_lat/rep_3/fio_output/r256-w256_sche_kyber_r_50us_w_100ms.txt
+None
+None
+sleep 5s
+None
+None
+umount /dev/nvme5n1
+None
+None
+nvme format -s 1 /dev/nvme5n1
+None
+None
+mkfs.ext4 /dev/nvme5n1
+None
+None
+mount /dev/nvme5n1 /mnt/nvme_test/
+None
+None
+head -c 50G </dev/urandom >/mnt/nvme_test/fio_file
+None
+None
+sleep 10s
+None
+None
+modprobe -r kyber_iosched
+None
+None
+modprobe kyber_iosched
+None
+None
+Set parameter read_lat_nsec to 100000000
+Set parameter write_lat_nsec to 20000
+exec bpftrace -e 'BEGIN {printf("start: %llu\n", nsecs)} tracepoint:kyber:kyber_adjust {printf("domain: %s, depth: %d, timestamp: %llu\n", args->domain, args->depth, nsecs)}' > results_kyber_vary_target_lat/rep_3/bpf_log/bpf_r256-w256_sche_kyber_r_100ms_w_20us.txt
+sleep 10s
+None
+None
+/mnt/sdc/zebin/local/fio-3.35/fio --time_based=1 --ramp_time=360s --runtime=360s --ioengine=io_uring --registerfiles=1 --fixedbufs=1 --size=100% --norandommap=1 --group_reporting=1 --direct=1 --output-format=json --bs=4k --filename=/mnt/nvme_test/fio_file --write_iops_log=results_kyber_vary_target_lat/rep_3/iops_log/r256-w256_sche_kyber_r_100ms_w_20us_iops --write_lat_log=results_kyber_vary_target_lat/rep_3/lat_log/r256-w256_sche_kyber_r_100ms_w_20us_lat --log_avg_msec=1000 --name=1 --rw=randread --cpus_allowed=1 --iodepth=1 --name=2 --rw=randwrite --cpus_allowed=2 --iodepth=256 -o results_kyber_vary_target_lat/rep_3/fio_output/r256-w256_sche_kyber_r_100ms_w_20us.txt
+None
+None
+sleep 5s
+None
+None
+umount /dev/nvme5n1
+None
+None
+nvme format -s 1 /dev/nvme5n1
+None
+None
+mkfs.ext4 /dev/nvme5n1
+None
+None
+mount /dev/nvme5n1 /mnt/nvme_test/
+None
+None
+head -c 50G </dev/urandom >/mnt/nvme_test/fio_file
+None
+None
+sleep 10s
+None
+None
+modprobe -r kyber_iosched
+None
+None
+modprobe kyber_iosched
+None
+None
+Set parameter read_lat_nsec to 50000
+Set parameter write_lat_nsec to 20000
+exec bpftrace -e 'BEGIN {printf("start: %llu\n", nsecs)} tracepoint:kyber:kyber_adjust {printf("domain: %s, depth: %d, timestamp: %llu\n", args->domain, args->depth, nsecs)}' > results_kyber_vary_target_lat/rep_4/bpf_log/bpf_r256-w256_sche_kyber_r_50us_w_20us.txt
+sleep 10s
+None
+None
+/mnt/sdc/zebin/local/fio-3.35/fio --time_based=1 --ramp_time=360s --runtime=360s --ioengine=io_uring --registerfiles=1 --fixedbufs=1 --size=100% --norandommap=1 --group_reporting=1 --direct=1 --output-format=json --bs=4k --filename=/mnt/nvme_test/fio_file --write_iops_log=results_kyber_vary_target_lat/rep_4/iops_log/r256-w256_sche_kyber_r_50us_w_20us_iops --write_lat_log=results_kyber_vary_target_lat/rep_4/lat_log/r256-w256_sche_kyber_r_50us_w_20us_lat --log_avg_msec=1000 --name=1 --rw=randread --cpus_allowed=1 --iodepth=1 --name=2 --rw=randwrite --cpus_allowed=2 --iodepth=256 -o results_kyber_vary_target_lat/rep_4/fio_output/r256-w256_sche_kyber_r_50us_w_20us.txt
+None
+None
+sleep 5s
+None
+None
+umount /dev/nvme5n1
+None
+None
+nvme format -s 1 /dev/nvme5n1
+None
+None
+mkfs.ext4 /dev/nvme5n1
+None
+None
+mount /dev/nvme5n1 /mnt/nvme_test/
+None
+None
+head -c 50G </dev/urandom >/mnt/nvme_test/fio_file
+None
+None
+sleep 10s
+None
+None
+modprobe -r kyber_iosched
+None
+None
+modprobe kyber_iosched
+None
+None
+Set parameter read_lat_nsec to 100000000
+Set parameter write_lat_nsec to 20000
+exec bpftrace -e 'BEGIN {printf("start: %llu\n", nsecs)} tracepoint:kyber:kyber_adjust {printf("domain: %s, depth: %d, timestamp: %llu\n", args->domain, args->depth, nsecs)}' > results_kyber_vary_target_lat/rep_4/bpf_log/bpf_r256-w256_sche_kyber_r_100ms_w_20us.txt
+sleep 10s
+None
+Success formatting namespace:1
+mke2fs 1.45.5 (07-Jan-2020)
+Discarding device blocks:      4096/244190646167776256/244190646                   done                            
+Creating filesystem with 244190646 4k blocks and 61054976 inodes
+Filesystem UUID: b4b7037b-3371-4352-a241-5a31fe37e828
+Superblock backups stored on blocks: 
+	32768, 98304, 163840, 229376, 294912, 819200, 884736, 1605632, 2654208, 
+	4096000, 7962624, 11239424, 20480000, 23887872, 71663616, 78675968, 
+	102400000, 214990848
+
+Allocating group tables:    0/7453         done                            
+Writing inode tables:    0/7453         done                            
+Creating journal (262144 blocks): done
+Writing superblocks and filesystem accounting information:    0/7453         done
+
+Success formatting namespace:1
+mke2fs 1.45.5 (07-Jan-2020)
+Discarding device blocks:      4096/244190646125833216/244190646                   done                            
+Creating filesystem with 244190646 4k blocks and 61054976 inodes
+Filesystem UUID: f800aed4-037a-4f4d-8788-3507ccf53015
+Superblock backups stored on blocks: 
+	32768, 98304, 163840, 229376, 294912, 819200, 884736, 1605632, 2654208, 
+	4096000, 7962624, 11239424, 20480000, 23887872, 71663616, 78675968, 
+	102400000, 214990848
+
+Allocating group tables:    0/7453         done                            
+Writing inode tables:    0/7453         done                            
+Creating journal (262144 blocks): done
+Writing superblocks and filesystem accounting information:    0/7453         done
+
+None
+/mnt/sdc/zebin/local/fio-3.35/fio --time_based=1 --ramp_time=360s --runtime=360s --ioengine=io_uring --registerfiles=1 --fixedbufs=1 --size=100% --norandommap=1 --group_reporting=1 --direct=1 --output-format=json --bs=4k --filename=/mnt/nvme_test/fio_file --write_iops_log=results_kyber_vary_target_lat/rep_4/iops_log/r256-w256_sche_kyber_r_100ms_w_20us_iops --write_lat_log=results_kyber_vary_target_lat/rep_4/lat_log/r256-w256_sche_kyber_r_100ms_w_20us_lat --log_avg_msec=1000 --name=1 --rw=randread --cpus_allowed=1 --iodepth=1 --name=2 --rw=randwrite --cpus_allowed=2 --iodepth=256 -o results_kyber_vary_target_lat/rep_4/fio_output/r256-w256_sche_kyber_r_100ms_w_20us.txt
+None
+None
+sleep 5s
+None
+None
+umount /dev/nvme5n1
+None
+None
+nvme format -s 1 /dev/nvme5n1
+None
+None
+mkfs.ext4 /dev/nvme5n1
+None
+None
+mount /dev/nvme5n1 /mnt/nvme_test/
+None
+None
+head -c 50G </dev/urandom >/mnt/nvme_test/fio_file
+None
+None
+sleep 10s
+None
+None
+modprobe -r kyber_iosched
+None
+None
+modprobe kyber_iosched
+None
+None
+Set parameter read_lat_nsec to 50000
+Set parameter write_lat_nsec to 100000000
+exec bpftrace -e 'BEGIN {printf("start: %llu\n", nsecs)} tracepoint:kyber:kyber_adjust {printf("domain: %s, depth: %d, timestamp: %llu\n", args->domain, args->depth, nsecs)}' > results_kyber_vary_target_lat/rep_4/bpf_log/bpf_r256-w256_sche_kyber_r_50us_w_100ms.txt
+sleep 10s
+None
+None
+/mnt/sdc/zebin/local/fio-3.35/fio --time_based=1 --ramp_time=360s --runtime=360s --ioengine=io_uring --registerfiles=1 --fixedbufs=1 --size=100% --norandommap=1 --group_reporting=1 --direct=1 --output-format=json --bs=4k --filename=/mnt/nvme_test/fio_file --write_iops_log=results_kyber_vary_target_lat/rep_4/iops_log/r256-w256_sche_kyber_r_50us_w_100ms_iops --write_lat_log=results_kyber_vary_target_lat/rep_4/lat_log/r256-w256_sche_kyber_r_50us_w_100ms_lat --log_avg_msec=1000 --name=1 --rw=randread --cpus_allowed=1 --iodepth=1 --name=2 --rw=randwrite --cpus_allowed=2 --iodepth=256 -o results_kyber_vary_target_lat/rep_4/fio_output/r256-w256_sche_kyber_r_50us_w_100ms.txt
+None
+None
+sleep 5s
+None
+None
+umount /dev/nvme5n1
+None
+None
+nvme format -s 1 /dev/nvme5n1
+None
+None
+mkfs.ext4 /dev/nvme5n1
+None
+None
+mount /dev/nvme5n1 /mnt/nvme_test/
+None
+None
+head -c 50G </dev/urandom >/mnt/nvme_test/fio_file
+None
+None
+sleep 10s
+None
+None
+modprobe -r kyber_iosched
+None
+None
+modprobe kyber_iosched
+None
+None
+Set parameter read_lat_nsec to 100000000
+Set parameter write_lat_nsec to 100000000
+exec bpftrace -e 'BEGIN {printf("start: %llu\n", nsecs)} tracepoint:kyber:kyber_adjust {printf("domain: %s, depth: %d, timestamp: %llu\n", args->domain, args->depth, nsecs)}' > results_kyber_vary_target_lat/rep_4/bpf_log/bpf_r256-w256_sche_kyber_r_100ms_w_100ms.txt
+sleep 10s
+None
+None
+/mnt/sdc/zebin/local/fio-3.35/fio --time_based=1 --ramp_time=360s --runtime=360s --ioengine=io_uring --registerfiles=1 --fixedbufs=1 --size=100% --norandommap=1 --group_reporting=1 --direct=1 --output-format=json --bs=4k --filename=/mnt/nvme_test/fio_file --write_iops_log=results_kyber_vary_target_lat/rep_4/iops_log/r256-w256_sche_kyber_r_100ms_w_100ms_iops --write_lat_log=results_kyber_vary_target_lat/rep_4/lat_log/r256-w256_sche_kyber_r_100ms_w_100ms_lat --log_avg_msec=1000 --name=1 --rw=randread --cpus_allowed=1 --iodepth=1 --name=2 --rw=randwrite --cpus_allowed=2 --iodepth=256 -o results_kyber_vary_target_lat/rep_4/fio_output/r256-w256_sche_kyber_r_100ms_w_100ms.txt
+None
+None
+sleep 5s
+None
+None
+###########Result without std###########
+READ IOPS
+& 20us & 100ms
+50us & 15.5 & 17.5 & \\
+100ms & 14.8 & 15.0 & \\
+
+WRITE IOPS
+& 20us & 100ms
+50us & 118.2 & 72.9 & \\
+100ms & 143.8 & 140.1 & \\
+
+READ latency in ms
+& 20us & 100ms
+50us & 0.2 & 0.2 & \\
+100ms & 0.2 & 0.2 & \\
+
+Write latency in ms
+& 20us & 100ms
+50us & 2.3 & 3.8 & \\
+100ms & 2.1 & 2.1 & \\
+
+###########Result with std###########
+READ IOPS
+& 20us & 100ms
+50us & 15.5 (0.5) & 17.5 (0.0) & \\
+100ms & 14.8 (0.2) & 15.0 (0.1) & \\
+
+WRITE IOPS
+& 20us & 100ms
+50us & 118.2 (0.5) & 72.9 (0.7) & \\
+100ms & 143.8 (1.6) & 140.1 (3.5) & \\
+
+READ latency in ms
+& 20us & 100ms
+50us & 0.2 (0.0) & 0.2 (0.0) & \\
+100ms & 0.2 (0.0) & 0.2 (0.0) & \\
+
+Write latency in ms
+& 20us & 100ms
+50us & 2.3 (0.0) & 3.8 (0.0) & \\
+100ms & 2.1 (0.0) & 2.1 (0.0) & \\
+

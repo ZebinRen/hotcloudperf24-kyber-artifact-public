@@ -1,0 +1,25 @@
+Attaching 2 probes...
+start: 458041926070354
+domain: WRITE, depth: 32, timestamp: 458152328013463
+domain: WRITE, depth: 64, timestamp: 458153160069786
+domain: WRITE, depth: 128, timestamp: 458153264015016
+domain: WRITE, depth: 32, timestamp: 458274516012987
+domain: WRITE, depth: 64, timestamp: 458279312062647
+domain: WRITE, depth: 128, timestamp: 458280040012007
+domain: WRITE, depth: 32, timestamp: 458305628063658
+domain: WRITE, depth: 64, timestamp: 458305744013512
+domain: WRITE, depth: 128, timestamp: 458305848069197
+domain: WRITE, depth: 96, timestamp: 458413112011816
+domain: WRITE, depth: 120, timestamp: 458414568012377
+domain: WRITE, depth: 128, timestamp: 458414672046153
+domain: WRITE, depth: 32, timestamp: 458450332011542
+domain: WRITE, depth: 64, timestamp: 458452228034651
+domain: WRITE, depth: 128, timestamp: 458452332069154
+domain: WRITE, depth: 32, timestamp: 458488096010215
+domain: WRITE, depth: 64, timestamp: 458488316063305
+domain: WRITE, depth: 128, timestamp: 458488420026754
+domain: WRITE, depth: 64, timestamp: 458752036013177
+domain: WRITE, depth: 16, timestamp: 458752556013250
+domain: WRITE, depth: 32, timestamp: 458753492012541
+domain: WRITE, depth: 64, timestamp: 458753596009458
+domain: WRITE, depth: 128, timestamp: 458753704009969
