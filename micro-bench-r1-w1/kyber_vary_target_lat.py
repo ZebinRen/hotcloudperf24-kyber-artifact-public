@@ -9,21 +9,20 @@ from sched_util import *
 
 import matplotlib.pyplot as plt
 
-NSEC_PER_SEC = 1000000000
+FIO_CMD = '/mnt/sdc/zebin/local/fio-3.35/fio'
+devices = '/dev/nvme9n1'
+device_name = 'nvme9n1'
 
+NSEC_PER_SEC = 1000000000
 
 # CONSTANTS for kyber
 def us_in_ns(us):
     return str(int(us) * 1000)
 
-
 def ms_in_ns(ms):
     return str(int(ms) * 1000000)
 
-
 # Machine-dependent settings
-devices = '/dev/nvme9n1'
-device_name = 'nvme9n1'
 scheduler = 'kyber'
 # Both start and end are inclusive
 rep_start = 0
@@ -75,7 +74,6 @@ fig_dir = results_root
 
 FIO_RAMP_TIME = 360
 FIO_RUN_TIME = 360
-FIO_CMD = '/mnt/sdc/zebin/local/fio-3.35/fio'
 
 # Parse command line settings
 parser = argparse.ArgumentParser(

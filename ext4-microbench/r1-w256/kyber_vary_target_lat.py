@@ -10,9 +10,14 @@ from inspect import currentframe, getframeinfo
 
 import matplotlib.pyplot as plt
 
+devices = '/dev/nvme5n1'
+device_name = 'nvme5n1'
+mount_dir = '/mnt/nvme_test/'
+FIO_CMD = '/mnt/sdc/zebin/local/fio-3.35/fio'
+
+
 NSEC_PER_SEC = 1000000000
 debug = False
-
 
 # CONSTANTS for kyber
 def us_in_ns(us):
@@ -27,9 +32,6 @@ read_target_latencies_plot_ticks = ['50', '100×10$^{3}$']
 write_target_latencies_plot_ticks = ['20', '100×10$^{3}$']
 
 # Machine-dependent settings
-devices = '/dev/nvme5n1'
-device_name = 'nvme5n1'
-mount_dir = '/mnt/nvme_test/'
 fio_file = os.path.join(mount_dir, 'fio_file')
 scheduler = 'kyber'
 rep_start = 0
@@ -88,7 +90,6 @@ fig_dir = results_root
 
 FIO_RAMP_TIME = 360
 FIO_RUN_TIME = 360
-FIO_CMD = '/mnt/sdc/zebin/local/fio-3.35/fio'
 
 if debug:
     FIO_RAMP_TIME = 1
